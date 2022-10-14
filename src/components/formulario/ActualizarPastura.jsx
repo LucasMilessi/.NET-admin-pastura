@@ -6,7 +6,7 @@ import imgPorDef from "../../img/ImagenPorDefecto.png";
 
 const URL_API = "http://localhost:1234/pastura/update/:id"
 
-export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
+export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID}) => {
 
     const [familia, setFamilia] = useState('');
     const [especie, setEspecie] = useState('');
@@ -34,24 +34,6 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
     const [tipo_productivo, setTipo_productivo] = useState('');
     const [tipoDeCampo, setTipoDeCampo] = useState('');
     const [img, setImg] = useState('');
-
-    const [imagen, setImagen] = useState(''); // Imagen desencriptada que viene de detalle
-
-
-    useEffect(() => {
-        contruirImg();
-    }, [detalle])
-    
-
-    const contruirImg = async() => {
-
-        const base64 = Base64.decode(detalle.img.data);
-        const url = await detalle.img.contentType;
-
-        const imagen = base64+','+url;  
-
-        setImagen(imagen)
-    }
 
     const pasturaPorId = () => {
         
@@ -250,7 +232,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
                         </div>
 
                     </label>
-                    { !img ? <img className='imgEdit' src={imagen} alt='' /> : <img className='imgEdit'  src={img} /> }
+                    { !img ? <img className='imgEdit' src={imgPorID} alt='' /> : <img className='imgEdit'  src={img} /> }
                     <center><button type="submit" className='btn btn-success btnEdit' >Actualizar pastura</button></center>
                 </div>
             </div>

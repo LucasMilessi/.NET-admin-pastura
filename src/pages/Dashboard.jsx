@@ -21,7 +21,7 @@ export const Dashboard = () => {
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(response => {
-            setListPasturas(response);
+            setListPasturas(response.pasturaMap);
         });
     }  
 
