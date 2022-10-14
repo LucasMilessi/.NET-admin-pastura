@@ -44,8 +44,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
     
 
     const contruirImg = async() => {
-        
-        console.log('Hola');
+
         const base64 = Base64.decode(detalle.img.data);
         const url = await detalle.img.contentType;
 
@@ -252,7 +251,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
 
                     </label>
                     { !img ? <img className='imgEdit' src={imagen} alt='' /> : <img className='imgEdit'  src={img} /> }
-                    <center><button type="submit" className='btn btn-success btnEdit' >Agregar pastura</button></center>
+                    <center><button type="submit" className='btn btn-success btnEdit' >Actualizar pastura</button></center>
                 </div>
             </div>
         </form>

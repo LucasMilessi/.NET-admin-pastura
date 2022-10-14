@@ -11,9 +11,9 @@ export const ListarPasturas = ({ listPasturas }) => {
     const [detalle, setDetalle] = useState([]);
 
 
-    // useEffect(() => {
-    //     obtenerDetallePorId();
-    // }, [clickEdit])
+    useEffect(() => {
+        contruirImg();
+    }, [])
     
 
     const obtenerDetallePorId = (id) => {
@@ -30,23 +30,27 @@ export const ListarPasturas = ({ listPasturas }) => {
     //     eliminarPastura();
     // })
 
-    // const contruirImg = async() => {
+    const contruirImg = async() => {
 
-    //     console.log(listPasturas.length);
-    //     console.log(listPasturas[11].img);
+        console.log("hola");
 
-    //     for (let i = 0; i < listPasturas.length; i++) {
+        console.log(listPasturas);
 
-    //         console.log(listPasturas[i].img);
+        listPasturas.map((past) => {
 
-    //     const base64 = await Base64.decode(listPasturas[i].img.data);
-    //     const url = await listPasturas[i].img.contentType;
+            console.log("hola");
+            const base64 = Base64.decode(past.img.data);
+            const url = past.img.contentType;
+    
+            const cadena = base64+','+url;
+            const image = atob(cadena); 
 
-    //     const imagen = await base64+','+url;  
+            setImagen({...image, image})
 
-    //     setImagen({...imagen, imagen})
-    //     }
-    // }
+        })
+
+        console.log(imagen);
+    }
 
     // if(listPasturas.img !== null){
     //     contruirImg();
@@ -57,8 +61,6 @@ export const ListarPasturas = ({ listPasturas }) => {
         method: 'DELETE',
         }).then(res => console.log(res))
     }
-
-    console.log(imagen);
 
   return (
     <div class="view">
@@ -96,7 +98,7 @@ export const ListarPasturas = ({ listPasturas }) => {
                     </tr> 
                 </thead>
                 <tbody>
-                    { listPasturas.map((list) => 
+                    { listPasturas.map((list, i) => 
                         <tr key={list._id}>
                             <td>{list.familia}</td>
                             <td>{list.especie}</td>
@@ -123,7 +125,7 @@ export const ListarPasturas = ({ listPasturas }) => {
                             <td>{list.ciclo_productivo}</td>
                             <td>{list.tipo_productivo}</td>
                             <td>{list.tipo_de_campo}</td>
-                            <td><img src={imgPorDef} /></td>
+                            <td><img src={imagen[i]} /></td>
                             <td>
                             <button type="button" id="edit" class="btn btn-primary" onClick={() => {obtenerDetallePorId(list._id)}} >Editar</button>
                                 <button type="button" class="btn btn-danger" onClick={() => eliminarPastura(list._id) }>Borrar</button>

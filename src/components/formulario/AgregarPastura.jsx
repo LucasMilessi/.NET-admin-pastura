@@ -224,6 +224,7 @@ export const AgregarPastura = ({ setClick }) => {
                                     />
                                 </div>
                             </label>
+                            {!img ? <img className='imgCrear' /> : <img className='imgCrear'  src={img} /> }
                             <center><button type="submit" className='btn btn-success' >Agregar pastura</button></center>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         todasLasPasturas();
-    }, [ click == false, listPasturas ])
+    }, [listPasturas])
     
 
     const todasLasPasturas = () => {

@@ -149,4 +149,11 @@ label{
     cursor: pointer;    
 }
 
+.imgCrear{
+        margin-bottom: 20px;
+        height: 200px;
+        width: 200px;
+        border: 1px black solid;
+}
+
 
