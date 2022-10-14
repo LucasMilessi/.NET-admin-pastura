@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import FileBase from 'react-file-base64';
 import "../../style/components/formulario/agregarPastura.css"
-import pasto from '../../img/hierba.png'
 
 export const AgregarPastura = ({ setClick }) => {
 
@@ -32,14 +31,14 @@ export const AgregarPastura = ({ setClick }) => {
     const [tipoDeCampo, setTipoDeCampo] = useState('');
     const [img, setImg] = useState('');
 
-    const actualizar = () =>{
+    const actualizar = () => {
         setClick(false);
     }
 
     const guardarPastura = () => {
         var datos = img.split(',')[0];
         var contentType = img.split(',')[1];
-        
+
         let request = {
             "familia": familia,
             "especie": especie,
@@ -66,9 +65,9 @@ export const AgregarPastura = ({ setClick }) => {
             "ciclo_productivo": ciclo_productivo,
             "tipo_productivo": tipo_productivo,
             "tipo_de_campo": tipoDeCampo,
-            "img":{
-                "data":datos,
-                "contentType":contentType,
+            "img": {
+                "data": datos,
+                "contentType": contentType,
             },
         };
 
@@ -85,148 +84,154 @@ export const AgregarPastura = ({ setClick }) => {
     };
 
 
-  return (
-    <div className='overlay'>
-        
-        <div className='contenedorModal'>
+    return (
+        <div className='overlay-ag'>
 
-            <div className='encabezado'> 
-                <h4>Agregar Pastura:</h4>
-            </div>
+            <div className='contenedorModal-ag'>
 
-            <div className='botonCerrar' onClick={()=> actualizar()}> 
-                X
-            </div>
+                <div className='encabezado-ag'>
+                    <h4>Agregar Pastura:</h4>
+                    <div className='botonCerrar-ag' onClick={() => actualizar()}>
+                        X
+                    </div>
+                </div>
 
-            <div className='contenido'> 
                 <form onSubmit={guardarPastura}>
-                    <div className='columna'>
-                        <label>
-                            Familia:
-                            <input type='text' placeholder='Ingrese Familia' onChange={(e) => setFamilia(e.target.value)} />
-                        </label>
-                        <label>
-                            Especie:
-                            <input type='text' placeholder='Ingrese Especie' onChange={(e) => setEspecie(e.target.value)} />
-                        </label>
-                        <label>
-                            Tipo vegetativo:
-                            <input type='text' placeholder='Ingrese Tipo vegetativo' onChange={(e) => setTipo_vegetativo(e.target.value)} />
-                        </label>
-                        <label>
-                            Rizoma Engrozado:
-                            <input type='text' placeholder='Rizoma Engrozado' onChange={(e) => setRizoma_engrozado(e.target.value)} />
-                        </label>
-                        <label>
-                            Macollo 1:
-                            <input type='text' placeholder='Ingrese Macollo 1' onChange={(e) => setMacollo1(e.target.value)} />
-                        </label>
-                        <label>
-                            Macollo 2:
-                            <input type='text' placeholder='Ingrese Macollo 2' onChange={(e) => setMacollo2(e.target.value)} />
-                        </label>
-                        <label>
-                            Consistecia de la ligula:
-                            <input type='text' placeholder='Ingrese Consistecia de la ligula' onChange={(e) => setConsistecia_de_la_ligula(e.target.value)} />
-                        </label>
-                        <label>
-                            Forma de la ligula:
-                            <input type='text' placeholder='Ingrese Forma de la ligula' onChange={(e) => setForma_de_la_ligula(e.target.value)} />
-                        </label>
-                        <label>
-                            Tamaño:
-                            <input type='text' placeholder='Ingrese Tamaño' onChange={(e) => setTamanio(e.target.value)} />
-                        </label>
-                        <label>
-                            Otra Caracteristica Ligula:
-                            <input type='text' placeholder='Ingrese Otra Caracteristica Ligula' onChange={(e) => setOtraCaracteristicaLigula(e.target.value)} />
-                        </label>
-                    </div>
-                    <div className='columna'>
-                        <label>
-                            Color de la ligula:
-                            <input type='text' placeholder='Ingrese Color de la ligula' onChange={(e) => setColor_de_la_ligula(e.target.value)} />
-                        </label>
-                        <label>
-                            Forma de la lamina:
-                            <input type='text' placeholder='Ingrese Forma de la lamina' onChange={(e) => setForma_de_la_lamina(e.target.value)} />
-                        </label>
-                        <label>
-                            Canaliculada:
-                            <input type='text' placeholder='Ingrese Canaliculada' onChange={(e) => setCanaliculada(e.target.value)} />
-                        </label>
-                        <label>
-                            Tipo de lamina:
-                            <input type='text' placeholder='Ingrese Tipo de lamina' onChange={(e) => setTipo_de_lamina(e.target.value)} />
-                        </label>
-                        <label>
-                            Apice:
-                            <input type='text' placeholder='Ingrese Apice' onChange={(e) => setApice(e.target.value)} />
-                        </label>
-                        <label>
-                            Nervadura central marcada:
-                            <input type='text' placeholder='Ingrese Nervadura central marcada' onChange={(e) => setNervadura_central_marcada(e.target.value)} />
-                        </label>
-                        <label>
-                            Observaciones:
-                            <input type='text' placeholder='Ingrese Observaciones' onChange={(e) => setObservaciones(e.target.value)} />
-                        </label>
-                        <label>
-                            Pelos:
-                            <input type='text' placeholder='Ingrese Pelos' onChange={(e) => setPelos(e.target.value)} />
-                        </label>
-                        <label>
-                            Ubicación De Pelos:
-                            <input type='text' placeholder='Ingrese Ubicación De Pelos' onChange={(e) => setUbicaciónDePelos(e.target.value)} />
-                        </label>
-                        <label>
-                            Observacion:
-                            <input type='text' placeholder='Ingrese Observacion' onChange={(e) => setObservacion(e.target.value)} />
-                        </label>
-                    </div>
-                    <div className='columna'>
-                        <label>
-                            Observaciones Generales:
-                            <input type='text' placeholder='Ingrese Observaciones Generales' onChange={(e) => setObservacionesGenerales(e.target.value)} />
-                        </label>
-                        <label>
-                            Ciclo de vida:
-                            <input type='text' placeholder='Ingrese Ciclo de vida' onChange={(e) => setCiclo_de_vida(e.target.value)} />
-                        </label>
-                        <label>
-                            Ciclo productivo:
-                            <input type='text' placeholder='Ingrese Ciclo productivo' onChange={(e) => setCiclo_productivo(e.target.value)} />
-                        </label>
-                        <label>
-                            Tipo productivo:
-                            <input type='text' placeholder='Ingrese Tipo productivo' onChange={(e) => setTipo_productivo(e.target.value)} />
-                        </label>
-                        <label>
-                            Tipo De Campo:
-                            <input type='text' placeholder='Ingrese Tipo De Campo' onChange={(e) => setTipoDeCampo(e.target.value)} />
-                        </label>
-                    
-                        <label>
-                            Seleccione una imagen:
 
-                            <div class="file-select">
-                                <FileBase
-                                    type="file"
-                                    accept="image/*"
-                                    multiple={false}
-                                    name="src-file1"
-                                    className="inputBase"
-                                    onDone={({ base64 }) => setImg( base64 )}
-                                />
-                            </div>
-                        </label>
-                        <button type="submit" className='btn btn-success' >Agregar pastura</button>
+                    <div className='contenido-ag'>
+                        <div className='columna1'>
+                            <label>
+                                Familia:
+                                <input type='text' placeholder='Ingrese Familia' onChange={(e) => setFamilia(e.target.value)} />
+                            </label>
+                            <label>
+                                Especie:
+                                <input type='text' placeholder='Ingrese Especie' onChange={(e) => setEspecie(e.target.value)} />
+                            </label>
+                            <label>
+                                Tipo vegetativo:
+                                <input type='text' placeholder='Ingrese Tipo vegetativo' onChange={(e) => setTipo_vegetativo(e.target.value)} />
+                            </label>
+                            <label>
+                                Rizoma Engrozado:
+                                <input type='text' placeholder='Rizoma Engrozado' onChange={(e) => setRizoma_engrozado(e.target.value)} />
+                            </label>
+                            <label>
+                                Macollo 1:
+                                <input type='text' placeholder='Ingrese Macollo 1' onChange={(e) => setMacollo1(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className='columna2'>
+                            <label>
+                                Macollo 2:
+                                <input type='text' placeholder='Ingrese Macollo 2' onChange={(e) => setMacollo2(e.target.value)} />
+                            </label>
+                            <label>
+                                Consistecia de la ligula:
+                                <input type='text' placeholder='Ingrese Consistecia de la ligula' onChange={(e) => setConsistecia_de_la_ligula(e.target.value)} />
+                            </label>
+                            <label>
+                                Forma de la ligula:
+                                <input type='text' placeholder='Ingrese Forma de la ligula' onChange={(e) => setForma_de_la_ligula(e.target.value)} />
+                            </label>
+                            <label>
+                                Tamaño:
+                                <input type='text' placeholder='Ingrese Tamaño' onChange={(e) => setTamanio(e.target.value)} />
+                            </label>
+                            <label>
+                                Otra Caracteristica Ligula:
+                                <input type='text' placeholder='Ingrese Otra Caracteristica Ligula' onChange={(e) => setOtraCaracteristicaLigula(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className='columna3'>
+                            <label>
+                                Color de la ligula:
+                                <input type='text' placeholder='Ingrese Color de la ligula' onChange={(e) => setColor_de_la_ligula(e.target.value)} />
+                            </label>
+                            <label>
+                                Forma de la lamina:
+                                <input type='text' placeholder='Ingrese Forma de la lamina' onChange={(e) => setForma_de_la_lamina(e.target.value)} />
+                            </label>
+                            <label>
+                                Canaliculada:
+                                <input type='text' placeholder='Ingrese Canaliculada' onChange={(e) => setCanaliculada(e.target.value)} />
+                            </label>
+                            <label>
+                                Tipo de lamina:
+                                <input type='text' placeholder='Ingrese Tipo de lamina' onChange={(e) => setTipo_de_lamina(e.target.value)} />
+                            </label>
+                            <label>
+                                Apice:
+                                <input type='text' placeholder='Ingrese Apice' onChange={(e) => setApice(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className='columna4'>
+                            <label>
+                                Nervadura central marcada:
+                                <input type='text' placeholder='Ingrese Nervadura central marcada' onChange={(e) => setNervadura_central_marcada(e.target.value)} />
+                            </label>
+                            <label>
+                                Observaciones:
+                                <input type='text' placeholder='Ingrese Observaciones' onChange={(e) => setObservaciones(e.target.value)} />
+                            </label>
+                            <label>
+                                Pelos:
+                                <input type='text' placeholder='Ingrese Pelos' onChange={(e) => setPelos(e.target.value)} />
+                            </label>
+                            <label>
+                                Ubicación De Pelos:
+                                <input type='text' placeholder='Ingrese Ubicación De Pelos' onChange={(e) => setUbicaciónDePelos(e.target.value)} />
+                            </label>
+                            <label>
+                                Observacion:
+                                <input type='text' placeholder='Ingrese Observacion' onChange={(e) => setObservacion(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className='columna5'>
+                            <label>
+                                Observaciones Generales:
+                                <input type='text' placeholder='Ingrese Observaciones Generales' onChange={(e) => setObservacionesGenerales(e.target.value)} />
+                            </label>
+                            <label>
+                                Ciclo de vida:
+                                <input type='text' placeholder='Ingrese Ciclo de vida' onChange={(e) => setCiclo_de_vida(e.target.value)} />
+                            </label>
+                            <label>
+                                Ciclo productivo:
+                                <input type='text' placeholder='Ingrese Ciclo productivo' onChange={(e) => setCiclo_productivo(e.target.value)} />
+                            </label>
+                            <label>
+                                Tipo productivo:
+                                <input type='text' placeholder='Ingrese Tipo productivo' onChange={(e) => setTipo_productivo(e.target.value)} />
+                            </label>
+                            <label>
+                                Tipo De Campo:
+                                <input type='text' placeholder='Ingrese Tipo De Campo' onChange={(e) => setTipoDeCampo(e.target.value)} />
+                            </label>
+                        </div>
+                        <div className='columna6'>
+                            <label>
+                                Seleccione una imagen:
+
+                                <div class="file-select-agregar">
+                                    <FileBase
+                                        type="file"
+                                        accept="image/*"
+                                        multiple={false}
+                                        name="src-file1"
+                                        className="inputBase"
+                                        onDone={({ base64 }) => setImg(base64)}
+                                    />
+                                </div>
+                            </label>
+                            <center><button type="submit" className='btn btn-success' >Agregar pastura</button></center>
+                        </div>
                     </div>
                 </form>
+
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 

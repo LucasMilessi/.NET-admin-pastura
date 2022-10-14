@@ -1,13 +1,30 @@
-import React from 'react'
 import { useEffect, useState } from "react";
 import { Base64 } from "js-base64";
 import imgPorDef from "../../img/ImagenPorDefecto.png";
 import "../../style/components/tabla/listarPasturas.css"
+import { ActualizarPastura } from "../formulario/ActualizarPastura";
 
 export const ListarPasturas = ({ listPasturas }) => {
 
     const [imagen, setImagen] = useState([]);
     const [clickEdit, setClickEdit] = useState(false);
+    const [detalle, setDetalle] = useState([]);
+
+
+    // useEffect(() => {
+    //     obtenerDetallePorId();
+    // }, [clickEdit])
+    
+
+    const obtenerDetallePorId = (id) => {
+        fetch('https://Pasturas-Back.fernandoh11.repl.co/pastura/search/' + id)
+            .then(response => response.json())
+            .then(data => {
+                setDetalle(data);
+            });
+        console.log(detalle);
+        setClickEdit(true);
+    }
 
     // useEffect(() => {
     //     eliminarPastura();
@@ -108,14 +125,15 @@ export const ListarPasturas = ({ listPasturas }) => {
                             <td>{list.tipo_de_campo}</td>
                             <td><img src={imgPorDef} /></td>
                             <td>
-                                <button type="button" class="btn btn-success me-2">Editar</button>  
+                            <button type="button" id="edit" class="btn btn-primary" onClick={() => {obtenerDetallePorId(list._id)}} >Editar</button>
                                 <button type="button" class="btn btn-danger" onClick={() => eliminarPastura(list._id) }>Borrar</button>
                             </td>
                         </tr>
                     )}
                  </tbody>
             </table>
-        </div>    
+        </div>
+        {clickEdit && <ActualizarPastura detalle={detalle} setClickEdit={setClickEdit} setDetalle={setDetalle} />}    
     </div>
   )
 }
