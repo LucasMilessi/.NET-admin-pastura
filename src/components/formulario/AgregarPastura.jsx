@@ -81,7 +81,6 @@ export const AgregarPastura = ({ setClick }) => {
         fetch("http://localhost:1234/pastura/create", requestOptions)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
-
         setClick(false);
     };
 
