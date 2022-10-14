@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AgregarPastura } from "../components/formulario/AgregarPastura";
 import { ListarPasturas } from "../components/tabla/ListarPasturas";
-import "../style/dashboard.css"
+import "../style/pages/dashboard.css"
 
 const URL_API = "http://localhost:1234/pastura"
 
@@ -12,7 +12,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         todasLasPasturas();
-    }, [ click == false ])
+    }, [ click == false, listPasturas ])
     
 
     const todasLasPasturas = () => {
@@ -28,13 +28,10 @@ export const Dashboard = () => {
     return (
         <div className="dashboard">
             <div className="head">
-
-            </div>
-            <div className="nav">
-
+                <h1>HOLAAAAA MUNDOOOO</h1>
             </div>
             <div className="listaPastura">
-                <button type="button" class="btn btn-primary" onClick={() => setClick(true)} > Agregar una Pastura </button>
+                <button type="button" class="btn btn-primary btnAgregar" onClick={() => setClick(true)} > Agregar una Pastura </button>
                 { click && <AgregarPastura setClick={setClick} /> }
                 <ListarPasturas listPasturas={listPasturas} />
             </div>

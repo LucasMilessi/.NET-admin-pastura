@@ -1,4 +1,4 @@
-.contenedorModal-ag{
+.contenedorModal{
     display: flex;
     flex-direction: column;
     overflow-x: auto;
@@ -10,19 +10,19 @@
     width: 1350px !important;
 }
 
-.overlay-ag{
+.overlay{
     width: 100%;
     height: 100%;
     position: fixed;
     top:0;
     left:0;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(202, 202, 202, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.encabezado-ag{
+.encabezado{
     display:flex;
     flex-direction: row;
     align-items: center;
@@ -32,12 +32,12 @@
     border-bottom: 1px solid #e8e8e8;
 }
 
-.encabezado-ag > h4{
+.encabezado > h4{
     font-weight: 500;
     font-size:20px;
 }
 
-.botonCerrar-ag{
+.botonCerrar{
     justify-content: center;
     
     top:20px;
@@ -54,11 +54,11 @@
     font-size: 20px;
 }
 
-.botonCerrar-ag:hover{
+.botonCerrar:hover{
     background: rgba(0,0,0, .2)
 }
 
-.contenido-ag{
+.contenido{
 	display: flex;
     flex-direction: row;
     justify-content: center;
@@ -69,37 +69,37 @@
     border-radius: 20px;
 }
 
-.columna1{
+.col1{
     height: 400px;
     width: 200px;
     
 }
 
-.columna2{
+.col2{
     height: 400px;
     width: 200px;
 
 }
 
-.columna3{
+.col3{
     height: 400px;
     width: 200px;
 
 }
 
-.columna4{
+.col4{
     height: 400px;
     width: 200px;
 
 }
 
-.columna5{
+.col5{
     height: 400px;
     width: 200px;
 
 }
 
-.columna6{
+.col6{
     height: 400px;
     width: 200px;
 
@@ -111,13 +111,12 @@ label{
     font-size: 14px;
 }
 
-.file-select-agregar {
+.file-select {
     position: relative;
-    display: inline-block;
-    
+    display: inline-block;    
   }
   
-.file-select-agregar::before {
+.file-select::before {
     background-color: #5678EF;
     color: white;
     display: flex;
@@ -132,7 +131,7 @@ label{
     bottom: 0;
 }
   
-.file-select-agregar input[type="file"] {
+.file-select input[type="file"] {
     opacity: 0;
     width: 200px;
     height: 32px;
@@ -148,5 +147,19 @@ label{
 .inputBase{
     cursor: pointer;    
 }
+
+.imgEdit {
+    margin-bottom: 20px;
+    height: 200px;
+    width: 200px;
+    border: 1px black solid;
+}
+
+.btnEdit {
+    width: 200px;
+    height: 30px;
+    
+}
+
 
 
