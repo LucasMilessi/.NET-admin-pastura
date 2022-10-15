@@ -8,33 +8,33 @@ const URL_API = "http://localhost:1234/pastura/update/:id"
 
 export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID}) => {
 
-    const [familia, setFamilia] = useState('');
-    const [especie, setEspecie] = useState('');
-    const [tipo_vegetativo, setTipo_vegetativo] = useState('');
-    const [rizoma_engrozado, setRizoma_engrozado] = useState('');
-    const [macollo1, setMacollo1] = useState('');
-    const [macollo2, setMacollo2] = useState('');
-    const [consistecia_de_la_ligula, setConsistecia_de_la_ligula] = useState('');
-    const [forma_de_la_ligula, setForma_de_la_ligula] = useState('');
-    const [tamanio, setTamanio] = useState('');
-    const [otraCaracteristicaLigula, setOtraCaracteristicaLigula] = useState('');
-    const [color_de_la_ligula, setColor_de_la_ligula] = useState('');
-    const [forma_de_la_lamina, setForma_de_la_lamina] = useState('');
-    const [canaliculada, setCanaliculada] = useState('');
-    const [tipo_de_lamina, setTipo_de_lamina] = useState('');
-    const [apice, setApice] = useState('');
-    const [nervadura_central_marcada, setNervadura_central_marcada] = useState('');
-    const [observaciones, setObservaciones] = useState('');
-    const [pelos, setPelos] = useState('');
-    const [ubicaciónDePelos, setUbicaciónDePelos] = useState('');
-    const [observacion, setObservacion] = useState('');
-    const [observacionesGenerales, setObservacionesGenerales] = useState('');
-    const [ciclo_de_vida, setCiclo_de_vida] = useState('');
-    const [ciclo_productivo, setCiclo_productivo] = useState('');
-    const [tipo_productivo, setTipo_productivo] = useState('');
-    const [tipoDeCampo, setTipoDeCampo] = useState('');
+    const [familia, setFamilia] = useState(detalle.familia);
+    const [especie, setEspecie] = useState(detalle.especie);
+    const [tipo_vegetativo, setTipo_vegetativo] = useState(detalle.tipo_vegetativo);
+    const [rizoma_engrozado, setRizoma_engrozado] = useState(detalle.rizoma_engrozado);
+    const [macollo1, setMacollo1] = useState(detalle.macollo1);
+    const [macollo2, setMacollo2] = useState(detalle.macollo2);
+    const [consistecia_de_la_ligula, setConsistecia_de_la_ligula] = useState(detalle.consistecia_de_la_ligula);
+    const [forma_de_la_ligula, setForma_de_la_ligula] = useState(detalle.forma_de_la_ligula);
+    const [tamanio, setTamanio] = useState(detalle.tamanio);
+    const [otraCaracteristicaLigula, setOtraCaracteristicaLigula] = useState(detalle.otraCaracteristicaLigula);
+    const [color_de_la_ligula, setColor_de_la_ligula] = useState(detalle.color_de_la_ligula);
+    const [forma_de_la_lamina, setForma_de_la_lamina] = useState(detalle.forma_de_la_lamina);
+    const [canaliculada, setCanaliculada] = useState(detalle.canaliculada);
+    const [tipo_de_lamina, setTipo_de_lamina] = useState(detalle.tipo_de_lamina);
+    const [apice, setApice] = useState(detalle.apice);
+    const [nervadura_central_marcada, setNervadura_central_marcada] = useState(detalle.nervadura_central_marcada);
+    const [observaciones, setObservaciones] = useState(detalle.observaciones);
+    const [pelos, setPelos] = useState(detalle.pelos);
+    const [ubicaciónDePelos, setUbicaciónDePelos] = useState(detalle.ubicaciónDePelos);
+    const [observacion, setObservacion] = useState(detalle.observacion);
+    const [observacionesGenerales, setObservacionesGenerales] = useState(detalle.observacionesGenerales);
+    const [ciclo_de_vida, setCiclo_de_vida] = useState(detalle.ciclo_de_vida);
+    const [ciclo_productivo, setCiclo_productivo] = useState(detalle.ciclo_productivo);
+    const [tipo_productivo, setTipo_productivo] = useState(detalle.tipo_productivo);
+    const [tipoDeCampo, setTipoDeCampo] = useState(detalle.tipoDeCampo);
     const [img, setImg] = useState('');
-
+    
     const pasturaPorId = () => {
         
         var datos =  img.split(',')[0];
