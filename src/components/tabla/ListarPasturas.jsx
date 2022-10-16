@@ -93,12 +93,12 @@ export const ListarPasturas = ({ listPasturas }) => {
                             <td>{list.pastura.tipo_de_campo}</td>
                             <td>{list.image ? <img src={list.image} /> : <img src={imgPorDef} />}</td>
                             <td>
-                            <button type="button" id="edit" class="btn btn-primary" onClick={() => {obtenerDetallePorId(list.pastura._id)}} >Editar</button>
+                                <button type="button" id="edit" class="btn btn-success me-2" onClick={() => {obtenerDetallePorId(list.pastura._id)}} >Editar</button>
                                 <button type="button" class="btn btn-danger" onClick={() => eliminarPastura(list.pastura._id) }>Borrar</button>
                             </td>
                         </tr>
                     )}
-                 </tbody>
+                </tbody>
             </table>
         </div>
         {clickEdit && detalle !== null ? <ActualizarPastura imgPorID={imgPorID} detalle={detalle} setClickEdit={setClickEdit} setDetalle={setDetalle} /> : null}    
