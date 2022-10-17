@@ -213,7 +213,7 @@ export const AgregarPastura = ({ setClick }) => {
                             <label>
                                 Seleccione una imagen:
 
-                                <div class="file-select-agregar">
+                                <div className="file-select-agregar">
                                     <FileBase
                                         type="file"
                                         accept="image/*"

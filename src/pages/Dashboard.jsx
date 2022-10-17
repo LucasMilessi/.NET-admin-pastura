@@ -31,7 +31,7 @@ export const Dashboard = () => {
                 <h1>HOLAAAAA MUNDOOOO</h1>
             </div>
             <div className="listaPastura">
-                <button type="button" class="btn btn-primary btnAgregar" onClick={() => setClick(true)} > Agregar una Pastura </button>
+                <button type="button" className="btn btn-primary btnAgregar" onClick={() => setClick(true)} > Agregar una Pastura </button>
                 { click && <AgregarPastura setClick={setClick} /> }
                 <ListarPasturas listPasturas={listPasturas} />
             </div>

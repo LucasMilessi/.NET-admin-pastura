@@ -29,10 +29,10 @@ export const ListarPasturas = ({ listPasturas }) => {
     }
 
   return (
-    <div class="view">
-        <div class="wrapper">
-            <table class="table">
-                <thead class="table-danger">
+    <div className="view">
+        <div className="wrapper">
+            <table className="table">
+                <thead className="table-danger">
                     <tr>
                         <th>Familia</th>
                         <th>Especie</th>
@@ -93,8 +93,8 @@ export const ListarPasturas = ({ listPasturas }) => {
                             <td>{list.pastura.tipo_de_campo}</td>
                             <td>{list.image ? <img src={list.image} /> : <img src={imgPorDef} />}</td>
                             <td>
-                                <button type="button" id="edit" class="btn btn-success me-2" onClick={() => {obtenerDetallePorId(list.pastura._id)}} >Editar</button>
-                                <button type="button" class="btn btn-danger" onClick={() => eliminarPastura(list.pastura._id) }>Borrar</button>
+                                <button type="button" id="edit" className="btn btn-success me-2" onClick={() => {obtenerDetallePorId(list.pastura._id)}} >Editar</button>
+                                <button type="button" className="btn btn-danger" onClick={() => eliminarPastura(list.pastura._id) }>Borrar</button>
                             </td>
                         </tr>
                     )}

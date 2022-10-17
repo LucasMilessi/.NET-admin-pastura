@@ -33,7 +33,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
     const [ciclo_productivo, setCiclo_productivo] = useState(detalle.ciclo_productivo);
     const [tipo_productivo, setTipo_productivo] = useState(detalle.tipo_productivo);
     const [tipoDeCampo, setTipoDeCampo] = useState(detalle.tipoDeCampo);
-    const [img, setImg] = useState('');
+    const [img, setImg] = useState(detalle.img);
     
     const pasturaPorId = () => {
         
@@ -220,7 +220,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
                     <label>
                         Seleccione una imagen:
 
-                        <div class="file-select-agregar">
+                        <div className="file-select-agregar">
                             <FileBase
                                 type="file"
                                 accept="image/*"
