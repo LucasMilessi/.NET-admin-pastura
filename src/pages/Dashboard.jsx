@@ -22,6 +22,7 @@ export const Dashboard = () => {
         .catch(error => console.error('Error:', error))
         .then(response => {
             setListPasturas(response.pasturaMap);
+            
         });
     }  
 

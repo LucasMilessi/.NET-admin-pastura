@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import FileBase from 'react-file-base64';
 import "../../style/components/formulario/agregarPastura.css"
+import { app } from '../../firebase/fb';
+import carga from '../../img/carga.gif'
 
 export const AgregarPastura = ({ setClick }) => {
 
@@ -29,15 +30,16 @@ export const AgregarPastura = ({ setClick }) => {
     const [ciclo_productivo, setCiclo_productivo] = useState('');
     const [tipo_productivo, setTipo_productivo] = useState('');
     const [tipoDeCampo, setTipoDeCampo] = useState('');
-    const [img, setImg] = useState('');
+    const [urlImage, setUrlImage] = useState('');
+
+    const [clickBoton, setClikBoton] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const actualizar = () => {
         setClick(false);
     }
 
-    const guardarPastura = () => {
-        var datos = img.split(',')[0];
-        var contentType = img.split(',')[1];
+    const guardarPastura = (e) => {
 
         let request = {
             "familia": familia,
@@ -65,10 +67,7 @@ export const AgregarPastura = ({ setClick }) => {
             "ciclo_productivo": ciclo_productivo,
             "tipo_productivo": tipo_productivo,
             "tipo_de_campo": tipoDeCampo,
-            "img": {
-                "data": datos,
-                "contentType": contentType,
-            },
+            "img": urlImage,
         };
 
         const requestOptions = {
@@ -80,8 +79,34 @@ export const AgregarPastura = ({ setClick }) => {
         fetch("http://localhost:1234/pastura/create", requestOptions)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
+        .then(data => {
+            const coleccionRef = app.firestore().collection("archivos");
+            coleccionRef.doc(data._id).set({ id: data._id, url: urlImage })
+        })
         setClick(false);
     };
+
+    const archivoHandler = async(e) => {
+
+        if(e.target.files[0] === undefined) return;
+
+        setClikBoton(true);
+        setIsLoading(true);
+
+        const img = e.target.files[0];
+        const storageRef = app.storage().ref();
+        const archivoPath = storageRef.child(img.name);
+
+        await archivoPath.put(img);
+
+        const imgUrl = await archivoPath.getDownloadURL();
+        setUrlImage(imgUrl);
+        
+        setClikBoton(false);
+        setIsLoading(false);
+    }
+
+
 
 
     return (
@@ -96,7 +121,7 @@ export const AgregarPastura = ({ setClick }) => {
                     </div>
                 </div>
 
-                <form onSubmit={guardarPastura}>
+                <form onSubmit={(e) => guardarPastura(e)}>
 
                     <div className='contenido-ag'>
                         <div className='columna1'>
@@ -214,18 +239,15 @@ export const AgregarPastura = ({ setClick }) => {
                                 Seleccione una imagen:
 
                                 <div className="file-select-agregar">
-                                    <FileBase
-                                        type="file"
-                                        accept="image/*"
-                                        multiple={false}
-                                        name="src-file1"
-                                        className="inputBase"
-                                        onDone={({ base64 }) => setImg(base64)}
-                                    />
+                                    <input className='inputBase' type="file" accept='image/*' onChange={(e) => archivoHandler(e)} />
+                                </div>
+                                <div className='cargaImg'>
+                                    {isLoading && <center><img src={carga} alt='' /></center>}
                                 </div>
                             </label>
-                            {!img ? <img className='imgCrear' /> : <img className='imgCrear'  src={img} /> }
-                            <center><button type="submit" className='btn btn-success' >Agregar pastura</button></center>
+                            {urlImage ? <img src={urlImage} className='imgCrear' alt='' /> : <img className='imgCrear' alt='' /> }
+
+                            <center><button id='agregarPast' disabled={clickBoton} type="submit" className='btn btn-success' >Agregar pastura</button></center>
                         </div>
                     </div>
                 </form>

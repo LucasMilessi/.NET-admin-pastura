@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Base64 } from "js-base64";
+import { useState } from "react";
 import imgPorDef from "../../img/ImagenPorDefecto.png";
 import "../../style/components/tabla/listarPasturas.css"
 import { ActualizarPastura } from "../formulario/ActualizarPastura";
@@ -9,7 +8,6 @@ export const ListarPasturas = ({ listPasturas }) => {
 
     const [clickEdit, setClickEdit] = useState(false);
     const [detalle, setDetalle] = useState([]);
-    const [imgPorID, setImgPorID] = useState('')
     
 
     const obtenerDetallePorId = (id) => {
@@ -17,7 +15,6 @@ export const ListarPasturas = ({ listPasturas }) => {
             .then(response => response.json())
             .then(data => {
                 setDetalle(data.pastura);
-                setImgPorID(data.image);
             });
         setClickEdit(true);
     }
@@ -77,43 +74,43 @@ export const ListarPasturas = ({ listPasturas }) => {
                     </thead>
                     <tbody>
                         { listPasturas.map((list) => 
-                            <tr key={list.pastura._id}>
-                                <td>{list.pastura.familia}</td>
-                                <td>{list.pastura.especie}</td>
-                                <td>{list.pastura.tipo_vegetativo}</td>
-                                <td>{list.pastura.rizoma_engrozado}</td>
-                                <td>{list.pastura.macollo1}</td>
-                                <td>{list.pastura.macollo2}</td>
-                                <td>{list.pastura.consistecia_de_la_ligula}</td>
-                                <td>{list.pastura.forma_de_la_ligula}</td>
-                                <td>{list.pastura.tamanio}</td>
-                                <td>{list.pastura.otra_caracteristica_ligula}</td>
-                                <td>{list.pastura.color_de_la_ligula}</td>
-                                <td>{list.pastura.forma_de_la_lamina}</td>
-                                <td>{list.pastura.canaliculada}</td>
-                                <td>{list.pastura.tipo_de_lamina}</td>
-                                <td>{list.pastura.apice}</td>
-                                <td>{list.pastura.nervadura_central_marcada}</td>
-                                <td>{list.pastura.observaciones}</td>
-                                <td>{list.pastura.pelos}</td>
-                                <td>{list.pastura.ubicación_de_pelos}</td>
-                                <td>{list.pastura.observacion}</td>
-                                <td>{list.pastura.observaciones_generales}</td>
-                                <td>{list.pastura.ciclo_de_vida}</td>
-                                <td>{list.pastura.ciclo_productivo}</td>
-                                <td>{list.pastura.tipo_productivo}</td>
-                                <td>{list.pastura.tipo_de_campo}</td>
-                                <td>{list.image ? <img src={list.image} /> : <img src={imgPorDef} />}</td>
+                            <tr key={list._id}>
+                                <td>{list.familia}</td>
+                                <td>{list.especie}</td>
+                                <td>{list.tipo_vegetativo}</td>
+                                <td>{list.rizoma_engrozado}</td>
+                                <td>{list.macollo1}</td>
+                                <td>{list.macollo2}</td>
+                                <td>{list.consistecia_de_la_ligula}</td>
+                                <td>{list.forma_de_la_ligula}</td>
+                                <td>{list.tamanio}</td>
+                                <td>{list.otra_caracteristica_ligula}</td>
+                                <td>{list.color_de_la_ligula}</td>
+                                <td>{list.forma_de_la_lamina}</td>
+                                <td>{list.canaliculada}</td>
+                                <td>{list.tipo_de_lamina}</td>
+                                <td>{list.apice}</td>
+                                <td>{list.nervadura_central_marcada}</td>
+                                <td>{list.observaciones}</td>
+                                <td>{list.pelos}</td>
+                                <td>{list.ubicación_de_pelos}</td>
+                                <td>{list.observacion}</td>
+                                <td>{list.observaciones_generales}</td>
+                                <td>{list.ciclo_de_vida}</td>
+                                <td>{list.ciclo_productivo}</td>
+                                <td>{list.tipo_productivo}</td>
+                                <td>{list.tipo_de_campo}</td>
+                                <td>{list.img ? <img src={list.img} alt='' /> : <img src={imgPorDef} alt='' />}</td>
                                 <td>
-                                    <button type="button" id="edit" className="btn btn-success me-2" onClick={() => {obtenerDetallePorId(list.pastura._id)}} >Editar</button>
-                                    <button type="button" className="btn btn-danger" onClick={() => eliminarPastura(list.pastura._id) }>Borrar</button>
+                                    <button type="button" id="edit" className="btn btn-success me-2" onClick={() => {obtenerDetallePorId(list._id)}} >Editar</button>
+                                    <button type="button" className="btn btn-danger" onClick={() => eliminarPastura(list._id) }>Borrar</button>
                                 </td>
                             </tr>
                         )}
                     </tbody>
                 </table>
             </div>
-            {clickEdit && detalle !== null ? <ActualizarPastura imgPorID={imgPorID} detalle={detalle} setClickEdit={setClickEdit} setDetalle={setDetalle} /> : null}    
+            {clickEdit && detalle !== null ? <ActualizarPastura detalle={detalle} setClickEdit={setClickEdit} setDetalle={setDetalle} /> : null}    
         </div>
     </>
   )

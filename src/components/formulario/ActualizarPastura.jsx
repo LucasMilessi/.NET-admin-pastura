@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import FileBase from 'react-file-base64';
-import { Base64 } from "js-base64";
+import React, { useState } from 'react'
 import "../../style/actualizarPastura.css"
-import imgPorDef from "../../img/ImagenPorDefecto.png";
+// import imgPorDef from "../../img/ImagenPorDefecto.png";
+import { app } from '../../firebase/fb';
+import carga from '../../img/carga.gif'
 
-const URL_API = "http://localhost:1234/pastura/update/:id"
 
-export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID}) => {
+export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
 
     const [familia, setFamilia] = useState(detalle.familia);
     const [especie, setEspecie] = useState(detalle.especie);
@@ -33,45 +32,42 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
     const [ciclo_productivo, setCiclo_productivo] = useState(detalle.ciclo_productivo);
     const [tipo_productivo, setTipo_productivo] = useState(detalle.tipo_productivo);
     const [tipoDeCampo, setTipoDeCampo] = useState(detalle.tipoDeCampo);
-    const [img, setImg] = useState(detalle.img);
-    
-    const pasturaPorId = () => {
-        
-        var datos =  img.split(',')[0];
-        var contentType =  img.split(',')[1];
+    const [img] = useState(detalle.img);
 
-        console.log(e.target);
+    const [clickBoton, setClikBoton] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [imgUrl, setImgUrl] = useState('')
+        
+
+    const pasturaPorId = () => {
 
         let request = {
-            "familia": familia == "" ? "-" : familia,
-            "especie": especie == "" ? "-" : especie,
-            "tipo_vegetativo": tipo_vegetativo == "" ? "-" : tipo_vegetativo,
-            "rizoma_engrozado": rizoma_engrozado == "" ? "-" : rizoma_engrozado,
-            "macollo1": macollo1 == "" ? "-" : macollo1 == "" ? "-" : macollo1,
-            "macollo2": macollo2  == "" ? "-" : macollo2 == "" ? "-" : macollo2,
-            "consistecia_de_la_ligula": consistecia_de_la_ligula  == "" ? "-" : consistecia_de_la_ligula,
-            "forma_de_la_ligula": forma_de_la_ligula == "" ? "-" : forma_de_la_ligula,
-            "tamanio": tamanio == "" ? "-" : tamanio,
-            "otra_caracteristica_ligula": otraCaracteristicaLigula == "" ? "-" : otraCaracteristicaLigula,
-            "color_de_la_ligula": color_de_la_ligula == "" ? "-" : color_de_la_ligula,
-            "forma_de_la_lamina": forma_de_la_lamina == "" ? "-" : forma_de_la_lamina,
-            "canaliculada": canaliculada == "" ? "-" : canaliculada,
-            "tipo_de_lamina": tipo_de_lamina == "" ? "-" : tipo_de_lamina,
-            "apice": apice == "" ? "-" : apice,
-            "nervadura_central_marcada": nervadura_central_marcada == "" ? "-" : nervadura_central_marcada,
-            "observaciones": observaciones == "" ? "-" : observaciones,
-            "pelos": pelos == "" ? "-" : pelos,
-            "ubicación_de_pelos": ubicaciónDePelos == "" ? "-" : ubicaciónDePelos,
-            "observacion": observacion == "" ? "-" : observacion,
-            "observaciones_generales": observacionesGenerales == "" ? "-" : observacionesGenerales,
-            "ciclo_de_vida": ciclo_de_vida == "" ? "-" : ciclo_de_vida,
-            "ciclo_productivo": ciclo_productivo == "" ? "-" : ciclo_productivo,
-            "tipo_productivo": tipo_productivo == "" ? "-" : tipo_productivo,
-            "tipo_de_campo": tipoDeCampo == "" ? "-" : tipoDeCampo,
-            "img": {
-                "data": datos,
-                "contentType": contentType,
-            },
+            "familia": familia === "" ? "-" : familia,
+            "especie": especie === "" ? "-" : especie,
+            "tipo_vegetativo": tipo_vegetativo === "" ? "-" : tipo_vegetativo,
+            "rizoma_engrozado": rizoma_engrozado === "" ? "-" : rizoma_engrozado,
+            "macollo1": macollo1 === "" ? "-" : macollo1,
+            "macollo2": macollo2  === "" ? "-" : macollo2,
+            "consistecia_de_la_ligula": consistecia_de_la_ligula  === "" ? "-" : consistecia_de_la_ligula,
+            "forma_de_la_ligula": forma_de_la_ligula === "" ? "-" : forma_de_la_ligula,
+            "tamanio": tamanio === "" ? "-" : tamanio,
+            "otra_caracteristica_ligula": otraCaracteristicaLigula === "" ? "-" : otraCaracteristicaLigula,
+            "color_de_la_ligula": color_de_la_ligula === "" ? "-" : color_de_la_ligula,
+            "forma_de_la_lamina": forma_de_la_lamina === "" ? "-" : forma_de_la_lamina,
+            "canaliculada": canaliculada === "" ? "-" : canaliculada,
+            "tipo_de_lamina": tipo_de_lamina === "" ? "-" : tipo_de_lamina,
+            "apice": apice === "" ? "-" : apice,
+            "nervadura_central_marcada": nervadura_central_marcada === "" ? "-" : nervadura_central_marcada,
+            "observaciones": observaciones === "" ? "-" : observaciones,
+            "pelos": pelos === "" ? "-" : pelos,
+            "ubicación_de_pelos": ubicaciónDePelos === "" ? "-" : ubicaciónDePelos,
+            "observacion": observacion === "" ? "-" : observacion,
+            "observaciones_generales": observacionesGenerales === "" ? "-" : observacionesGenerales,
+            "ciclo_de_vida": ciclo_de_vida === "" ? "-" : ciclo_de_vida,
+            "ciclo_productivo": ciclo_productivo === "" ? "-" : ciclo_productivo,
+            "tipo_productivo": tipo_productivo === "" ? "-" : tipo_productivo,
+            "tipo_de_campo": tipoDeCampo === "" ? "-" : tipoDeCampo,
+            "img": imgUrl ? imgUrl : img,
         };
 
         const requestOptions = {
@@ -92,6 +88,27 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
         setClickEdit(false);
         setDetalle([]);
     }
+
+    const archivoHandler = async(e) => {
+
+        if(e.target.files[0] === undefined) return;
+
+        setClikBoton(true);
+        setIsLoading(true);
+
+        const img = e.target.files[0];
+        const storageRef = app.storage().ref();
+        const archivoPath = storageRef.child(img.name);
+
+        await archivoPath.put(img);
+
+        const imgUrl = await archivoPath.getDownloadURL();
+        setImgUrl(imgUrl);
+        
+        setClikBoton(false);
+        setIsLoading(false);
+    }
+
 
   return (
     <div className='overlay'>
@@ -223,19 +240,14 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
                         Seleccione una imagen:
 
                         <div className="file-select-agregar">
-                            <FileBase
-                                type="file"
-                                accept="image/*"
-                                multiple={false}
-                                name="src-file1"
-                                className="inputBase"
-                                onDone={({ base64 }) => setImg(base64)}
-                            />
+                            <input className='inputBase' type="file" accept='image/*' onChange={(e) => archivoHandler(e)} />
                         </div>
-
+                        <div className='cargaImg'>
+                            {isLoading && <center><img src={carga} alt='' /></center>}
+                        </div>
                     </label>
-                    { !img ? <img className='imgEdit' src={imgPorID} alt='' /> : <img className='imgEdit'  src={img} /> }
-                    <center><button type="submit" className='btn btn-success btnEdit' >Actualizar pastura</button></center>
+                    {imgUrl ? <img className='imgEdit' src={imgUrl} alt='' /> : <img className='imgEdit' src={detalle.img} alt='' />}
+                    <center><button type="submit" disabled={clickBoton} className='btn btn-success btnEdit' >Actualizar pastura</button></center>
                 </div>
             </div>
         </form>
