@@ -29,10 +29,10 @@ export const ListarPasturas = ({ listPasturas }) => {
     }
 
   return (
-    <div class="view">
-        <div class="wrapper">
-            <table class="table">
-                <thead class="table-danger">
+    <div className="view">
+        <div className="wrapper">
+            <table className="table">
+                <thead className="table-danger headTable">
                     <tr>
                         <th>Familia</th>
                         <th>Especie</th>
@@ -66,31 +66,31 @@ export const ListarPasturas = ({ listPasturas }) => {
                 <tbody>
                     { listPasturas.map((list) => 
                         <tr key={list.pastura._id}>
-                            <td>{list.pastura.familia}</td>
-                            <td>{list.pastura.especie}</td>
-                            <td>{list.pastura.tipo_vegetativo}</td>
-                            <td>{list.pastura.rizoma_engrozado}</td>
-                            <td>{list.pastura.macollo1}</td>
-                            <td>{list.pastura.macollo2}</td>
-                            <td>{list.pastura.consistecia_de_la_ligula}</td>
-                            <td>{list.pastura.forma_de_la_ligula}</td>
-                            <td>{list.pastura.tamanio}</td>
-                            <td>{list.pastura.otra_caracteristica_ligula}</td>
-                            <td>{list.pastura.color_de_la_ligula}</td>
-                            <td>{list.pastura.forma_de_la_lamina}</td>
-                            <td>{list.pastura.canaliculada}</td>
-                            <td>{list.pastura.tipo_de_lamina}</td>
-                            <td>{list.pastura.apice}</td>
-                            <td>{list.pastura.nervadura_central_marcada}</td>
-                            <td>{list.pastura.observaciones}</td>
-                            <td>{list.pastura.pelos}</td>
-                            <td>{list.pastura.ubicación_de_pelos}</td>
-                            <td>{list.pastura.observacion}</td>
-                            <td>{list.pastura.observaciones_generales}</td>
-                            <td>{list.pastura.ciclo_de_vida}</td>
-                            <td>{list.pastura.ciclo_productivo}</td>
-                            <td>{list.pastura.tipo_productivo}</td>
-                            <td>{list.pastura.tipo_de_campo}</td>
+                                <td>{list.pastura.familia}</td>
+                                <td>{list.pastura.especie}</td>
+                                <td>{list.pastura.tipo_vegetativo}</td>
+                                <td>{list.pastura.rizoma_engrozado}</td>
+                                <td>{list.pastura.macollo1}</td>
+                                <td>{list.pastura.macollo2}</td>
+                                <td>{list.pastura.consistecia_de_la_ligula}</td>
+                                <td>{list.pastura.forma_de_la_ligula}</td>
+                                <td>{list.pastura.tamanio}</td>
+                                <td>{list.pastura.otra_caracteristica_ligula}</td>
+                                <td>{list.pastura.color_de_la_ligula}</td>
+                                <td>{list.pastura.forma_de_la_lamina}</td>
+                                <td>{list.pastura.canaliculada}</td>
+                                <td>{list.pastura.tipo_de_lamina}</td>
+                                <td>{list.pastura.apice}</td>
+                                <td>{list.pastura.nervadura_central_marcada}</td>
+                                <td>{list.pastura.observaciones}</td>                           
+                                <td>{list.pastura.pelos}</td>
+                                <td>{list.pastura.ubicación_de_pelos}</td>
+                                <td>{list.pastura.observacion}</td>                          
+                                <td>{list.pastura.observaciones_generales}</td>
+                                <td>{list.pastura.ciclo_de_vida}</td>
+                                <td>{list.pastura.ciclo_productivo}</td>
+                                <td>{list.pastura.tipo_productivo}</td>
+                                <td>{list.pastura.tipo_de_campo}</td>                           
                             <td>{list.image ? <img src={list.image} /> : <img src={imgPorDef} />}</td>
                             <td>
                             <button type="button" id="edit" class="btn btn-primary" onClick={() => {obtenerDetallePorId(list.pastura._id)}} >Editar</button>

@@ -35,10 +35,12 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
     const [tipoDeCampo, setTipoDeCampo] = useState('');
     const [img, setImg] = useState('');
 
-    const pasturaPorId = () => {
+    const pasturaPorId = (e) => {
         
         var datos =  img.split(',')[0];
         var contentType =  img.split(',')[1];
+
+        console.log(e.target);
 
         let request = {
             "familia": familia == "" ? "-" : familia,
@@ -103,7 +105,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, imgPorID})
             </div>
         </div>
 
-        <form onSubmit={pasturaPorId}>
+        <form onSubmit={(e) => pasturaPorId(e)}>
 
             <div className='contenido'>
                 <div className='col1'>
