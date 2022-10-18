@@ -1,18 +1,31 @@
-import { Dashboard } from "./pages/Dashboard";
 import "./style/app.css"
-import { Login } from "./components/login/Login.js"
-import { Logout } from "./components/login/Logout.js"
-import { Profile } from "./components/login/Profile.js"
+
+import { useAuth0 } from '@auth0/auth0-react';
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
-  return (
-    <div>
-      <Login/>
-      <Profile/>
-      <Logout/>
-      <Dashboard />
-    </div>
-  );
-}
 
+  const {
+    isLoading,
+    isAuthenticated,
+    error,
+    user,
+    loginWithRedirect,
+  } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
+
+  if (isAuthenticated) {
+    return (
+      <Dashboard user={ user } />
+    );
+  } else {
+    return loginWithRedirect();
+  }
+}
 export default App;
