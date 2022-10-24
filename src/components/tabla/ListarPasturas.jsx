@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import imgPorDef from "../../img/ImagenPorDefecto.png";
 import "../../style/components/tabla/listarPasturas.css"
 import { ActualizarPastura } from "../formulario/ActualizarPastura";
 import  ReactHtmlTableToExcel  from "react-html-table-to-excel";
+import * as xlsx from 'xlsx';
 
 
 export const ListarPasturas = ({ listPasturas }) => {
 
     const [clickEdit, setClickEdit] = useState(false);
     const [detalle, setDetalle] = useState([]);
+    const [excelImportado, setExcelImportado] = useState([]);
+    const [filtrado, setFiltrado] = useState([]);
+    const [click, setClick] = useState(false);
     
 
     const obtenerDetallePorId = (id) => {
@@ -21,16 +25,58 @@ export const ListarPasturas = ({ listPasturas }) => {
     }
 
 
+
     const eliminarPastura = (id)=> {
         fetch('http://localhost:1234/pastura/delete/'+id, {
         method: 'DELETE',
         }).then(res => console.log(res))
     }
 
+    const handleFile = async (e) => {
+
+        const file = e.target.files[0];
+        const data = await file.arrayBuffer();
+        const workbook = xlsx.read(data)
+
+        const workSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = xlsx.utils.sheet_to_json(workSheet);
+
+        setExcelImportado( jsonData );   
+    
+    }
+
+    useEffect(() => {
+
+        // let result = [...excelImportado.especie]
+
+        // console.log(result);
+
+        // excelImportado.map((excel, i) => {
+
+        //     listPasturas.map((past, j) => {
+
+        //         if(excel.Especie !== past.especie){
+        //             console.log(excel.Especie);
+        //             setFiltrado([ ...filtrado, excel ]);
+                    
+        //         }
+        //     })
+        // })
+
+        // setExcelImportado([]);
+        
+        // setClick(false);
+
+        // console.log(filtrado);
+
+
+
+    }, [ click == true ]);
+    
 
   return (
     <>
-         <div align="center">
+         <div className="excel" align="center">
             <ReactHtmlTableToExcel 
                 id="botonExportExcel"
                 className="btn btn-primary"
@@ -40,6 +86,10 @@ export const ListarPasturas = ({ listPasturas }) => {
                 buttonText="Exportar a Excel"
             />
         </div>
+        <div>
+            <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e) => handleFile(e)} />
+        </div>
+        <button type="button" onClick={() => setClick(true)}>Excel</button>
         <div>
         <table hidden className="table" id="tablaExcel">
                     <thead className="table-danger">

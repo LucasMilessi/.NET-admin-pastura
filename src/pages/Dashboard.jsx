@@ -34,7 +34,7 @@ export  const Dashboard = ({ user }) => {
             <div className="head">
                 <div className="divHead">
                     <div className="divImgH3">
-                        <img src={user.picture} alt={user.name}></img>
+                        <img src={user.picture} alt=''></img>
                         <h6><b>{user.name}</b></h6>
                     </div>
                     <p><b>Email:</b> {user.email}</p>
