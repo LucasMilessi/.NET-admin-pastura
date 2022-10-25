@@ -66,10 +66,6 @@ export const ListarPasturas = ({ listPasturas }) => {
         console.log(datosIguales);
     };
 
-    // console.log(datosIguales);
-    // console.log(excelImportado);
-    // console.log(excelImportado.Especie);
-
   return (
     <>
          <div className="excel" align="center">
