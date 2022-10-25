@@ -11,7 +11,7 @@ export const ListarPasturas = ({ listPasturas }) => {
     const [clickEdit, setClickEdit] = useState(false);
     const [detalle, setDetalle] = useState([]);
     const [excelImportado, setExcelImportado] = useState([]);
-    const [filtrado, setFiltrado] = useState([]);
+    const [datosIguales, setDatosIguales] = useState([]);
     const [click, setClick] = useState(false);
     
 
@@ -39,38 +39,36 @@ export const ListarPasturas = ({ listPasturas }) => {
         const workSheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = xlsx.utils.sheet_to_json(workSheet);
 
-        setExcelImportado( jsonData );   
+
+        setExcelImportado( jsonData );  
+        
+        console.log(excelImportado.Especie);
+
+        
     
     }
 
-    useEffect(() => {
+    const importarExcel = () => {
 
-        // let result = [...excelImportado.especie]
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(excelImportado)
+        };
 
-        // console.log(result);
+        fetch("http://localhost:1234/pastura/excel", requestOptions)
+        .then(response => response.json(response))
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            setDatosIguales(response);
+        });
 
-        // excelImportado.map((excel, i) => {
+        console.log(datosIguales);
+    };
 
-        //     listPasturas.map((past, j) => {
-
-        //         if(excel.Especie !== past.especie){
-        //             console.log(excel.Especie);
-        //             setFiltrado([ ...filtrado, excel ]);
-                    
-        //         }
-        //     })
-        // })
-
-        // setExcelImportado([]);
-        
-        // setClick(false);
-
-        // console.log(filtrado);
-
-
-
-    }, [ click == true ]);
-    
+    // console.log(datosIguales);
+    // console.log(excelImportado);
+    // console.log(excelImportado.Especie);
 
   return (
     <>
@@ -87,7 +85,7 @@ export const ListarPasturas = ({ listPasturas }) => {
         <div>
             <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e) => handleFile(e)} />
         </div>
-        <button type="button" onClick={() => setClick(true)}>Excel</button>
+        <button type="button" onClick={() => importarExcel()}>Excel</button>
         <div>
         <table hidden className="table" id="tablaExcel">
                     <thead className="table-danger">
