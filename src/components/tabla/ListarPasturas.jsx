@@ -24,8 +24,6 @@ export const ListarPasturas = ({ listPasturas }) => {
         setClickEdit(true);
     }
 
-
-
     const eliminarPastura = (id)=> {
         fetch('http://localhost:1234/pastura/delete/'+id, {
         method: 'DELETE',
