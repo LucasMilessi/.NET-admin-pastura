@@ -1,7 +1,92 @@
+  #menuOpen {
+    position: absolute;
+    
+    margin: 20px;
+    background-color: #fff;
+   
+    transition:all .5s ease-out;
+    box-shadow: 6px 10px 10px black;
+    background-color: rgba(5, 255, 226, 0.4);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;  
+  }
+
+  #header{
+   position: fixed;
+   background-color: rgba(255,255,255,.2);
+    height: 80px;
+    width: 100%;
+    top: 0;
+  }
+
+ 
+
+  #menuOpen button{
+    position: absolute;
+    top: 0;
+    transition:all .5s ease-out;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none; 
+  }
+
+  #menuOpen header{
+    padding-left: 20px;
+    line-height: 40px;
+    transition-delay:.1s;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+  }
+
+  #menuOpen li{
+    box-shadow: 6px 10px 10px black;
+    position: absolute;
+    transition:all .5s ease-out;
+    overflow: hidden;
+    background-color: #fff;
+    text-align: left;
+
+    
+  }
+
+  #menuOpen li a{
+    text-decoration:none;
+    color: rgb(67, 67, 67);
+    transition: none;
+    transition-delay:none;
+    padding-left: 20px;
+    line-height: 50px;
+  }
+
+  #menuOpen li a:hover{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    transition: none;
+    transition-delay:none;
+    background: #efefef;
+  }
+
+  #menuOpen li:first-child{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  #menuOpen li:last-child{
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+ 
+
 .dashboard {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;   
+    background-image:url(https://revistaverde.com.uy/wp-content/uploads/2018/09/pasturas-b-9-18-e1582732167389.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 80px;
 }
 
 .head {
