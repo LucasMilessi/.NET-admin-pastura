@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import imgPorDef from "../../img/ImagenPorDefecto.png";
 import "../../style/components/tabla/listarPasturas.css"
 import { ActualizarPastura } from "../formulario/ActualizarPastura";
 import  ReactHtmlTableToExcel  from "react-html-table-to-excel";
 import * as xlsx from 'xlsx';
+import { ListaRepetidos } from "./ListaRepetidos";
+import { ModalImport } from "../modal/ModalImport";
 
 
 export const ListarPasturas = ({ listPasturas }) => {
 
     const [clickEdit, setClickEdit] = useState(false);
     const [detalle, setDetalle] = useState([]);
-    const [excelImportado, setExcelImportado] = useState([]);
-    const [datosIguales, setDatosIguales] = useState([]);
-    const [click, setClick] = useState(false);
-    
+    const [modal, setModal] = useState(false);
 
     const obtenerDetallePorId = (id) => {
         fetch('http://localhost:1234/pastura/search/'+id)
@@ -30,41 +29,41 @@ export const ListarPasturas = ({ listPasturas }) => {
         }).then(res => console.log(res))
     }
 
-    const handleFile = async (e) => {
+    // const handleFile = async (e) => {
 
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
-        const workbook = xlsx.read(data)
+    //     const file = e.target.files[0];
+    //     const data = await file.arrayBuffer();
+    //     const workbook = xlsx.read(data)
 
-        const workSheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = xlsx.utils.sheet_to_json(workSheet);
+    //     const workSheet = workbook.Sheets[workbook.SheetNames[0]];
+    //     const jsonData = xlsx.utils.sheet_to_json(workSheet);
 
+    //     setExcelImportado( jsonData );  
 
-        setExcelImportado( jsonData );  
-        
-        console.log(excelImportado.Especie);
-
-        
+    //     setBotonImport(false);    
     
-    }
+    // }
 
-    const importarExcel = () => {
+    // const importarExcel = async() => {
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(excelImportado)
-        };
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: { 'Content-Type' : 'application/json' },
+    //         body: JSON.stringify(excelImportado)
+    //     };
 
-        fetch("http://localhost:1234/pastura/excel", requestOptions)
-        .then(response => response.json(response))
-        .catch(error => console.error('Error:', error))
-        .then(response => {
-            setDatosIguales(response);
-        });
+    //     await fetch("http://localhost:1234/pastura/excel", requestOptions)
+    //     .then(response => response.json(response))
+    //     .catch(error => console.error('Error:', error))
+    //     .then(response => {
+    //         if(response !== null){
+    //             setDatosIguales(response);
+    //             setClick(true)
+    //         }    
+    //     });
 
-        console.log(datosIguales);
-    };
+    // };
+
 
   return (
     <>
@@ -77,11 +76,23 @@ export const ListarPasturas = ({ listPasturas }) => {
                 sheet="Pagina 1"
                 buttonText="Exportar a Excel"
             />
+
+            <button className="btn btn-primary" onClick={() => setModal(true)} >Importar Excel</button>
         </div>
-        <div>
-            <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e) => handleFile(e)} />
-        </div>
-        <button type="button" onClick={() => importarExcel()}>Excel</button>
+
+        { modal && <ModalImport setModal={setModal} /> }
+
+        {/* <div class="mb-3 divImport" align="center">
+            <label for="formFile" class="form-label">Importar Excel</label>
+            <input className='form-control form-control-sm' type="file" id="formFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e) => handleFile(e)} />
+            <button className="btn btn-primary btnImport" type="button" onClick={(e) => importarExcel(e)} hidden={botonImport} >Importar Excel</button>
+        </div> */}
+
+        
+        
+
+        
+
         <div>
         <table hidden className="table" id="tablaExcel">
                     <thead className="table-danger">
