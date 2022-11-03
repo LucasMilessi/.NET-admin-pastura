@@ -39,6 +39,10 @@ button {
     width: 100px;
 }
 
+tr{
+    background-color: white;
+}
+
 
 .wrapper::-webkit-scrollbar {
     width: 5px;

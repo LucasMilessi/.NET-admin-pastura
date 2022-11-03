@@ -5,7 +5,7 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+ 
     <Auth0Provider 
       domain='dev-kvadgzfb.us.auth0.com' 
       clientId='WbMlEyljryoJF9xogY6Q25iPmB2oZdDM' 
@@ -13,5 +13,5 @@ root.render(
     >
     <App />
     </Auth0Provider>
-  </React.StrictMode>
+ 
 );
