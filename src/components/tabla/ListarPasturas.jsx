@@ -2,9 +2,6 @@ import { useState } from "react";
 import imgPorDef from "../../img/ImagenPorDefecto.png";
 import "../../style/components/tabla/listarPasturas.css"
 import { ActualizarPastura } from "../formulario/ActualizarPastura";
-import  ReactHtmlTableToExcel  from "react-html-table-to-excel";
-import * as xlsx from 'xlsx';
-import { ListaRepetidos } from "./ListaRepetidos";
 import { ModalImport } from "../modal/ModalImport";
 
 

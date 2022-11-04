@@ -7,7 +7,7 @@
     box-shadow: rgba(100,100,111, 0.2) 0px 7px 29px 0px;
     padding: 20px;
     height: 550px !important;
-    width: 1400px !important;
+    width: 1000px !important;
 }
 
 .overlay-lis{
@@ -99,4 +99,15 @@
     background-color: darkgrey;
     outline: 1px solid slategrey;
     border-radius: 100px;
+}
+
+.botonesOpciones {
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    justify-content: space-around;
+}
+
+.botonesOpciones button {
+    height: 30px;
 }
