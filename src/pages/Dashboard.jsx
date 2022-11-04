@@ -4,6 +4,8 @@ import { AgregarPastura } from "../components/formulario/AgregarPastura";
 import { Logout } from "../components/login/Logout";
 import { ListarPasturas } from "../components/tabla/ListarPasturas";
 import "../style/pages/dashboard.css"
+import { ModalExport } from "../components/modal/ModalExport";
+import { ModalImport } from "../components/modal/ModalImport";
 
 const URL_API = "http://localhost:1234/pastura"
 
@@ -11,6 +13,10 @@ export  const Dashboard = ({ user }) => {
 
     const [listPasturas, setListPasturas] = useState([]);
     const [click, setClick] = useState(false);
+    const [clickExport, setClickExport] = useState(false);
+    const [clickImport, setClickImport] = useState(false);
+
+
     const menu = useRef();
     useEffect(() => {
         todasLasPasturas();
@@ -35,7 +41,7 @@ export  const Dashboard = ({ user }) => {
 
     const activarMenu=()=>{
       
-        console.log(menu.current);
+        // console.log(menu.current);
         if(menu.current.className=="menuOpen"){
             menu.current.className="menuClosed";
             ocultarMenu();
@@ -107,10 +113,8 @@ export  const Dashboard = ({ user }) => {
         menu.current.style.height="5px";
         
         titulo.style.opacity="0";
-        console.log(menu.current.getElementsByTagName("li"))
+        // console.log(menu.current.getElementsByTagName("li"))
     }
-
-
 
     return (
         <div className="dashboard">
@@ -120,8 +124,10 @@ export  const Dashboard = ({ user }) => {
                 <ol>
                    <li className="menu-item"><a href="">Home</a></li>
                    <li className="menu-item"><a href="">Lista de Pasturas</a></li>
-                   <li className="menu-item"><a href="">Crear Pastura</a></li> 
-                   <li className="menu-item"><a href="">Export / Import Excel</a></li>  
+                   <li className="menu-item"><a onClick={() => setClick(true)}>Crear Pastura</a></li> 
+                   <li className="menu-item"><a onClick={() => setClickExport(true)}>Export Excel</a></li>  
+                   <li className="menu-item"><a onClick={() => setClickImport(true)}>Import Excel</a></li>
+                   <li className="menu-item"><a>Registrar un Admin</a></li>
                 </ol>
                 <footer>
                     <button aria-label="Toggle menu">X</button>
@@ -129,8 +135,9 @@ export  const Dashboard = ({ user }) => {
             </nav>
             </header>
                 <div className="listaPastura">
-                    <button type="button" className="btn btn-primary btnAgregar" onClick={() => setClick(true)} > Agregar una Pastura </button>
                     { click && <AgregarPastura setClick={setClick} /> }
+                    { clickExport && <ModalExport setClickExport={setClickExport} /> }
+                    { clickImport && <ModalImport setClickImport={setClickImport} /> }
                     <ListarPasturas listPasturas={listPasturas} />
                 </div>
                 <div className="footer">

@@ -9,12 +9,13 @@
     background-color: rgba(5, 255, 226, 0.4);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;  
+    cursor:default ;
   }
 
   #header{
    position: fixed;
    background-color: rgba(255,255,255,.2);
-    height: 80px;
+    height: 100px;
     width: 100%;
     top: 0;
   }
@@ -57,6 +58,7 @@
     transition-delay:none;
     padding-left: 20px;
     line-height: 50px;
+    cursor: pointer;
   }
 
   #menuOpen li a:hover{
@@ -86,7 +88,7 @@
     background-image:url(https://revistaverde.com.uy/wp-content/uploads/2018/09/pasturas-b-9-18-e1582732167389.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 80px;
+    padding-top: 200px;
 }
 
 .head {
@@ -165,7 +167,7 @@
 
 .listaPastura {
     display: flex;
-    margin-top: 15px;
+    margin-top: 30px;
     margin-bottom: 25px;
     flex-direction: column;
 }

@@ -29,69 +29,12 @@ export const ListarPasturas = ({ listPasturas }) => {
         }).then(res => console.log(res))
     }
 
-    // const handleFile = async (e) => {
-
-    //     const file = e.target.files[0];
-    //     const data = await file.arrayBuffer();
-    //     const workbook = xlsx.read(data)
-
-    //     const workSheet = workbook.Sheets[workbook.SheetNames[0]];
-    //     const jsonData = xlsx.utils.sheet_to_json(workSheet);
-
-    //     setExcelImportado( jsonData );  
-
-    //     setBotonImport(false);    
-    
-    // }
-
-    // const importarExcel = async() => {
-
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type' : 'application/json' },
-    //         body: JSON.stringify(excelImportado)
-    //     };
-
-    //     await fetch("http://localhost:1234/pastura/excel", requestOptions)
-    //     .then(response => response.json(response))
-    //     .catch(error => console.error('Error:', error))
-    //     .then(response => {
-    //         if(response !== null){
-    //             setDatosIguales(response);
-    //             setClick(true)
-    //         }    
-    //     });
-
-    // };
-
 
   return (
     <>
-         <div className="excel" align="center">
-            <ReactHtmlTableToExcel 
-                id="botonExportExcel"
-                className="btn btn-primary"
-                table="tablaExcel"
-                filename="PasturasExcel"
-                sheet="Pagina 1"
-                buttonText="Exportar a Excel"
-            />
-
-            <button className="btn btn-primary" onClick={() => setModal(true)} >Importar Excel</button>
-        </div>
+        
 
         { modal && <ModalImport setModal={setModal} /> }
-
-        {/* <div class="mb-3 divImport" align="center">
-            <label for="formFile" class="form-label">Importar Excel</label>
-            <input className='form-control form-control-sm' type="file" id="formFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e) => handleFile(e)} />
-            <button className="btn btn-primary btnImport" type="button" onClick={(e) => importarExcel(e)} hidden={botonImport} >Importar Excel</button>
-        </div> */}
-
-        
-        
-
-        
 
         <div>
         <table hidden className="table" id="tablaExcel">

@@ -1,9 +1,9 @@
 import "../../style/components/tabla/listaRepetidos.css"
 
-export const ListaRepetidos = ({ datosIguales, setDatosIguales, setClickRepetidos, setModal }) => {
+export const ListaRepetidos = ({ datosIguales, setDatosIguales, setClickRepetidos, setClickImport }) => {
 
     const limpiarCampos = () => {
-        setModal(false);
+        setClickImport(false);
         setClickRepetidos(false);
         setDatosIguales([]);
     }
