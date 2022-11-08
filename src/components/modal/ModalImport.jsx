@@ -3,7 +3,7 @@ import * as xlsx from 'xlsx';
 import '../../style/components/modal/modalImport.css'
 import { ListaRepetidos } from '../tabla/ListaRepetidos';
 
-export const ModalImport = ({ setClickImport }) => {
+export const ModalImport = ({ setClickImport, todasLasPasturas }) => {
 
     const [excelImportado, setExcelImportado] = useState([]);
     const [datosIguales, setDatosIguales] = useState([]);
@@ -26,9 +26,8 @@ export const ModalImport = ({ setClickImport }) => {
     
     }
 
-    const importarExcel = async() => {
-
-        console.log(excelImportado);
+    const importarExcel = async(e) => {
+        e.preventDefault();
 
         const requestOptions = {
             method: 'POST',
@@ -49,9 +48,10 @@ export const ModalImport = ({ setClickImport }) => {
             }    
         });
 
+        await todasLasPasturas();
+
     };
 
-    // console.log(clickRepetidos);
 
     const limpiarCampos = () => {
         setClickImport(false);
@@ -74,7 +74,7 @@ export const ModalImport = ({ setClickImport }) => {
             <button className="btn btn-primary btnImport" type="button" onClick={(e) => importarExcel(e)} hidden={botonImport} >Importar Excel</button>
         </div>
 
-        { clickRepetidos && <ListaRepetidos datosIguales={datosIguales} setDatosIguales={setDatosIguales} setClickRepetidos={setClickRepetidos} setClickImport={setClickImport} /> }
+        { clickRepetidos && <ListaRepetidos datosIguales={datosIguales} setDatosIguales={setDatosIguales} setClickRepetidos={setClickRepetidos} setClickImport={setClickImport} todasLasPasturas={todasLasPasturas} /> }
 
     </div>
 </div>

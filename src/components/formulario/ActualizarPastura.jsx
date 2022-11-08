@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../style/actualizarPastura.css"
-// import imgPorDef from "../../img/ImagenPorDefecto.png";
 import { app } from '../../firebase/fb';
 import carga from '../../img/carga.gif'
+import Swal from "sweetalert2";
 
 
-export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
+export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, todasLasPasturas}) => {
 
     const [familia, setFamilia] = useState(detalle.familia);
     const [especie, setEspecie] = useState(detalle.especie);
@@ -37,9 +37,13 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
     const [clickBoton, setClikBoton] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState('')
+
+    
+    
         
 
-    const pasturaPorId = () => {
+    const pasturaPorId = async(e) => {
+        e.preventDefault();
 
         let request = {
             "familia": familia === "" ? "-" : familia,
@@ -69,6 +73,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
             "tipo_de_campo": tipoDeCampo === "" ? "-" : tipoDeCampo,
             "img": imgUrl ? imgUrl : img,
         };
+        
 
         const requestOptions = {
             method: 'POST',
@@ -76,17 +81,28 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle}) => {
             body: JSON.stringify(request)
         };
 
-         fetch("http://localhost:1234/pastura/update/"+detalle._id, requestOptions)
+        await fetch("http://localhost:1234/pastura/update/"+detalle._id, requestOptions)
             .then(response => response.json(response))
             .catch(error => console.error('Error:', error))
 
-         setClickEdit(false);
-         setDetalle([]);
+        setClickEdit(false);
+        setDetalle([]);
+        await todasLasPasturas();
+        alert();
     }
 
     const limpiarCampos = () => {
         setClickEdit(false);
         setDetalle([]);
+    }
+
+    const alert = () => {
+        
+        Swal.fire({
+            icon: 'success',
+            title:'Se actualizó correctamente',
+            timer: 2000,
+        })
     }
 
     const archivoHandler = async(e) => {

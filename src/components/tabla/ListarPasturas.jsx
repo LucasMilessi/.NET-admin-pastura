@@ -2,14 +2,13 @@ import { useState } from "react";
 import imgPorDef from "../../img/ImagenPorDefecto.png";
 import "../../style/components/tabla/listarPasturas.css"
 import { ActualizarPastura } from "../formulario/ActualizarPastura";
-import { ModalImport } from "../modal/ModalImport";
+import Swal from "sweetalert2";
 
 
-export const ListarPasturas = ({ listPasturas }) => {
+export const ListarPasturas = ({ listPasturas, todasLasPasturas }) => {
 
     const [clickEdit, setClickEdit] = useState(false);
     const [detalle, setDetalle] = useState([]);
-    const [modal, setModal] = useState(false);
 
     const obtenerDetallePorId = (id) => {
         fetch('http://localhost:1234/pastura/search/'+id)
@@ -20,18 +19,28 @@ export const ListarPasturas = ({ listPasturas }) => {
         setClickEdit(true);
     }
 
-    const eliminarPastura = (id)=> {
-        fetch('http://localhost:1234/pastura/delete/'+id, {
+    const eliminarPastura = async(id)=> {
+        await fetch('http://localhost:1234/pastura/delete/'+id, {
         method: 'DELETE',
-        }).then(res => console.log(res))
+        });
+
+        await todasLasPasturas();
+        alert();
+    }
+
+    const alert = () => {
+        
+        Swal.fire({
+            icon: 'success',
+            iconColor: 'red',
+            title:'Se borró la pastura correctamente',
+            timer: 1500,
+        })
     }
 
 
   return (
     <>
-        
-
-        { modal && <ModalImport setModal={setModal} /> }
 
         <div>
         <table hidden className="table" id="tablaExcel">
@@ -170,7 +179,7 @@ export const ListarPasturas = ({ listPasturas }) => {
                     </tbody>
                 </table>
             </div>
-            {clickEdit && detalle !== null ? <ActualizarPastura detalle={detalle} setClickEdit={setClickEdit} setDetalle={setDetalle} /> : null}    
+            {clickEdit && detalle !== null ? <ActualizarPastura detalle={detalle} setClickEdit={setClickEdit} setDetalle={setDetalle} todasLasPasturas={todasLasPasturas} /> : null}    
         </div>
     </>
   )

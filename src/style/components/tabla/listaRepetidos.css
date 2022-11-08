@@ -111,3 +111,11 @@
 .botonesOpciones button {
     height: 30px;
 }
+
+.ignorar {
+    display: flex !important;
+    float: right !important;
+    text-align: center;
+    /* font-size: 200px; */
+    color: red;
+}

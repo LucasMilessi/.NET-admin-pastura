@@ -1,31 +1,12 @@
 import "./style/app.css"
-import { useAuth0 } from '@auth0/auth0-react';
 import { Dashboard } from "./pages/Dashboard";
 import carga from './img/carga.gif'
 
 function App() {
 
-  const {
-    isLoading,
-    isAuthenticated,
-    error,
-    user,
-    loginWithRedirect,
-  } = useAuth0();
 
-  if (isLoading) {
-    return <img className="appCarga" src={carga} />;
-  }
-  if (error) {
-    return <div>Oops... {error.message}</div>;
-  }
-
-  if (isAuthenticated) {
-    return (
-      <Dashboard user={ user } />
-    );
-  } else {
-    return loginWithRedirect();
-  }
+  return(
+    <Dashboard />
+  )
 }
 export default App;

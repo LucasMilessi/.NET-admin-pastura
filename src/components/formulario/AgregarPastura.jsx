@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import "../../style/components/formulario/agregarPastura.css"
 import { app } from '../../firebase/fb';
 import carga from '../../img/carga.gif'
+import Swal from 'sweetalert2';
 
-export const AgregarPastura = ({ setClick }) => {
+export const AgregarPastura = ({ setClick, todasLasPasturas }) => {
 
     const [familia, setFamilia] = useState('');
     const [especie, setEspecie] = useState('');
@@ -39,7 +40,9 @@ export const AgregarPastura = ({ setClick }) => {
         setClick(false);
     }
 
-    const guardarPastura = (e) => {
+    const guardarPastura = async(e) => {
+
+        e.preventDefault();
 
         let request = {
             "familia": familia,
@@ -76,7 +79,7 @@ export const AgregarPastura = ({ setClick }) => {
             body: JSON.stringify(request)
         };
 
-        fetch("http://localhost:1234/pastura/create", requestOptions)
+        await fetch("http://localhost:1234/pastura/create", requestOptions)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(data => {
@@ -84,7 +87,18 @@ export const AgregarPastura = ({ setClick }) => {
             coleccionRef.doc(data._id).set({ id: data._id, url: urlImage })
         })
         setClick(false);
+        todasLasPasturas();
+        alert();
     };
+
+    const alert = () => {
+        
+        Swal.fire({
+            icon: 'success',
+            title:'Se creó correctamente',
+            timer: 2000,
+        })
+    }
 
     const archivoHandler = async(e) => {
 

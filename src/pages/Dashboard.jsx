@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { AgregarPastura } from "../components/formulario/AgregarPastura";
-import { Logout } from "../components/login/Logout";
 import { ListarPasturas } from "../components/tabla/ListarPasturas";
 import "../style/pages/dashboard.css"
 import { ModalExport } from "../components/modal/ModalExport";
@@ -9,7 +8,7 @@ import { ModalImport } from "../components/modal/ModalImport";
 
 const URL_API = "http://localhost:1234/pastura"
 
-export  const Dashboard = ({ user }) => {
+export  const Dashboard = () => {
 
     const [listPasturas, setListPasturas] = useState([]);
     const [click, setClick] = useState(false);
@@ -18,10 +17,10 @@ export  const Dashboard = ({ user }) => {
 
 
     const menu = useRef();
+    
     useEffect(() => {
         todasLasPasturas();
-        
-    }, [listPasturas]);
+    }, []);
 
    useEffect(()=>{
    activarMenu();
@@ -34,12 +33,11 @@ export  const Dashboard = ({ user }) => {
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(response => {
-            setListPasturas(response.pasturaMap);
-            
+            setListPasturas(response.pasturaMap);   
         });
     }  
 
-    const activarMenu=()=>{
+    const activarMenu = () => {
       
         // console.log(menu.current);
         if(menu.current.className=="menuOpen"){
@@ -51,9 +49,7 @@ export  const Dashboard = ({ user }) => {
         }
     }
 
-   
-
-    const desplegarMenu = ()=>{
+    const desplegarMenu = () => {
         let lis = menu.current.getElementsByTagName("li");
         let boton = menu.current.getElementsByTagName("button")[0];
         let titulo = menu.current.getElementsByTagName("header")[0];
@@ -135,10 +131,10 @@ export  const Dashboard = ({ user }) => {
             </nav>
             </header>
                 <div className="listaPastura">
-                    { click && <AgregarPastura setClick={setClick} /> }
+                    { click && <AgregarPastura setClick={setClick} todasLasPasturas={todasLasPasturas} /> }
                     { clickExport && <ModalExport setClickExport={setClickExport} /> }
-                    { clickImport && <ModalImport setClickImport={setClickImport} /> }
-                    <ListarPasturas listPasturas={listPasturas} />
+                    { clickImport && <ModalImport setClickImport={setClickImport} todasLasPasturas={todasLasPasturas} /> }
+                    <ListarPasturas listPasturas={listPasturas} todasLasPasturas={todasLasPasturas} />
                 </div>
                 <div className="footer">
 
