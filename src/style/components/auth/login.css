@@ -1,0 +1,79 @@
+#login {
+    background-color: rgb(224, 224, 224);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 100vw;
+    height: 100vh;
+}
+  
+.divForm {
+    background-color: white;
+    width: 600px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 5px 5px 60px black;
+}
+
+.imgLogin {
+    width: 500px;
+    height: 500px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 5px 5px 60px black;
+}
+
+.divForm div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 350px;
+}
+
+.divForm div h1 {
+    color: black;
+    font-weight: 300;
+    font-size: 60px;
+    margin-bottom: 30px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.divForm div input {
+    width: 100%;
+    height: 40px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 1px solid rgb(126, 126, 126);
+    outline: none;
+}
+
+.divForm div label {
+    align-self: flex-start;
+    height: 0;
+    color: black;
+    font-weight: 400;
+}
+
+.divForm div button {
+    width: 100%;
+    height: 40px;
+    background-color: #E5B14C;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    font-size: 15px !important;
+}
+
+.divForm div p{
+    color: black;
+}

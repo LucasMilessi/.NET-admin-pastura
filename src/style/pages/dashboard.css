@@ -1,6 +1,5 @@
   #menuOpen {
     position: absolute;
-    
     margin: 20px;
     background-color: #fff;
    
@@ -13,13 +12,24 @@
   }
 
   #header{
-   position: fixed;
-   background-color: rgba(255,255,255,.2);
+    position: fixed;
+    background-color: rgba(255,255,255,.2);
     height: 100px;
     width: 100%;
     top: 0;
   }
 
+  .logoutbtn {
+    background-color: transparent;
+    border-color: transparent;
+    width: 20px;
+    height: 20px;
+  }
+
+  #header button img{
+    width: 30px;
+    height: 30px;
+  }
  
 
   #menuOpen button{
@@ -132,13 +142,31 @@
     align-items: center;
 }
 
-.divImgH3 > img {
-    height: 40px;
-    width: 40px;
+.imgUser {
+    height: 70px;
+    width: 70px;
+    margin-left: 20px;
+    margin-right: 60px;
     background: linear-gradient(#fff, #fff) padding-box,
               linear-gradient(45deg, slateblue, coral) border-box;
     border: 2px solid transparent;
     border-radius: 50px;
+}
+
+.divimgbtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  float: right;
+  margin-right: 2px;
+}
+
+.userName {
+  padding: 0;
+  font-size: 25px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .divImgH3 > img, h6{
@@ -173,8 +201,6 @@
 }
 
 .footer {
-    grid-area: foot;
-    background-color: black;
     height: 114px;
 }
 

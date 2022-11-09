@@ -1,6 +1,8 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "firebase/compat/firestore";
+import { getAuth } from "firebase/auth";
+
 
 export const app = firebase.initializeApp({
     "projectId": "imagenes-net-5460d",
@@ -11,3 +13,5 @@ export const app = firebase.initializeApp({
     "authDomain": "imagenes-net-5460d.firebaseapp.com",
     "messagingSenderId": "1014393202177"
   });
+
+export const auth = getAuth(app);

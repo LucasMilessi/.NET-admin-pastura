@@ -5,21 +5,55 @@ import { ListarPasturas } from "../components/tabla/ListarPasturas";
 import "../style/pages/dashboard.css"
 import { ModalExport } from "../components/modal/ModalExport";
 import { ModalImport } from "../components/modal/ModalImport";
+import { Link, useNavigate } from "react-router-dom";
+import { Register } from "../components/auth/Registro";
+import { useAuth } from "../context/AuthContext";
+import Logout from '../img/cerrar-sesion.png'
+import { Home } from '../pages/Home'
+import imgDef from '../img/ImagenPorDefecto.png'
 
 const URL_API = "http://localhost:1234/pastura"
 
 export  const Dashboard = () => {
 
+    const { logout, user } = useAuth();
     const [listPasturas, setListPasturas] = useState([]);
     const [click, setClick] = useState(false);
     const [clickExport, setClickExport] = useState(false);
     const [clickImport, setClickImport] = useState(false);
+    const [clickListPast, setClickListPast] = useState(false);
+    const [home, setHome] = useState(false)
+    const [usuario, setUsuario] = useState([]);
+    const navigate = useNavigate();
+
+    const obtenerUsuario = () => {
+
+        fetch("http://localhost:1234/user/"+user.email)
+        .then(response => response.json(response))
+        .catch(error => console.error('Error:', error))
+        .then(user => {
+            setUsuario(user);   
+        });
+
+    }
+
+    
+    const handleLogout = async () => {
+        try {
+        await logout();
+        setClickListPast(false);
+        setHome(true);
+        } catch (error) {
+        console.error(error.message);
+        }
+    };
 
 
     const menu = useRef();
     
     useEffect(() => {
         todasLasPasturas();
+        obtenerUsuario();
     }, []);
 
    useEffect(()=>{
@@ -112,29 +146,51 @@ export  const Dashboard = () => {
         // console.log(menu.current.getElementsByTagName("li"))
     }
 
+    const clickListP = () => {
+        setHome(false);
+        setClickListPast(true);
+    }
+
+    const clickHome = () => {
+        setClickListPast(false);
+        setHome(true);  
+    }
+
+    console.log(usuario);
+
     return (
         <div className="dashboard">
             <header id="header">
+
             <nav id="menuOpen" ref={menu} onClick={()=>{activarMenu()}}>
                 <header>Menú</header>
                 <ol>
-                   <li className="menu-item"><a href="">Home</a></li>
-                   <li className="menu-item"><a href="">Lista de Pasturas</a></li>
-                   <li className="menu-item"><a onClick={() => setClick(true)}>Crear Pastura</a></li> 
-                   <li className="menu-item"><a onClick={() => setClickExport(true)}>Export Excel</a></li>  
-                   <li className="menu-item"><a onClick={() => setClickImport(true)}>Import Excel</a></li>
-                   <li className="menu-item"><a>Registrar un Admin</a></li>
-                </ol>
-                <footer>
+                    <div>
                     <button aria-label="Toggle menu">X</button>
-                </footer>
+                    </div>
+                    <li className="menu-item"><a onClick={() =>clickHome()}>Home</a></li>
+                    <li className="menu-item"><a onClick={() => clickListP()}>Lista de Pasturas</a></li>
+                    <li className="menu-item"><a onClick={() => setClick(true)}>Crear Pastura</a></li> 
+                    <li className="menu-item"><a onClick={() => setClickExport(true)}>Export Excel</a></li>  
+                    <li className="menu-item"><a onClick={() => setClickImport(true)}>Import Excel</a></li>
+                </ol>
             </nav>
+
+            
+
+            <div className="divimgbtn">
+                <h6 className="userName">{usuario.name}</h6>
+                { usuario.img ? <img className="imgUser" src={usuario.img} alt="Imagen" /> : <img className="imgUser" src={imgDef} alt="Imagen" />}
+                <button className="logoutbtn" onClick={ () => handleLogout() } ><img src={Logout} /></button>
+            </div>
+
             </header>
+
                 <div className="listaPastura">
                     { click && <AgregarPastura setClick={setClick} todasLasPasturas={todasLasPasturas} /> }
                     { clickExport && <ModalExport setClickExport={setClickExport} /> }
                     { clickImport && <ModalImport setClickImport={setClickImport} todasLasPasturas={todasLasPasturas} /> }
-                    <ListarPasturas listPasturas={listPasturas} todasLasPasturas={todasLasPasturas} />
+                    { clickListPast ? <ListarPasturas listPasturas={listPasturas} todasLasPasturas={todasLasPasturas} /> : <Home nombre={usuario.name} />}
                 </div>
                 <div className="footer">
 
