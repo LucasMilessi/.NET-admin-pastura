@@ -46,7 +46,7 @@ export function Register() {
             body: JSON.stringify(request)
         };
 
-        await fetch("https://pasturas-back.fernandoh11.repl.co/user/create", requestOptions)
+        await fetch("https://net-appi.fernandoh11.repl.co/user/create", requestOptions)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(data => {

@@ -20,7 +20,7 @@ export const ListaRepetidos = ({ datosIguales, setDatosIguales, setClickRepetido
             body: JSON.stringify(value)
         };
 
-        await fetch("https://pasturas-back.fernandoh11.repl.co/pastura/updateEspecie/"+value.Especie, requestOptions)
+        await fetch("https://net-appi.fernandoh11.repl.co/pastura/updateEspecie/"+value.Especie, requestOptions)
             .then(response => response.json(response))
             .catch(error => console.error('Error:', error))
            
@@ -39,7 +39,7 @@ export const ListaRepetidos = ({ datosIguales, setDatosIguales, setClickRepetido
             body: JSON.stringify(datosIguales)
         };
 
-        await fetch("https://pasturas-back.fernandoh11.repl.co/pastura/updateEspecieFor", requestOptions)
+        await fetch("https://net-appi.fernandoh11.repl.co/pastura/updateEspecieFor", requestOptions)
             .then(response => response.json(response))
             .catch(error => console.error('Error:', error))
 

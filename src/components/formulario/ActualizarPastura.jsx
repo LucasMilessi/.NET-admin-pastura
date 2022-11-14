@@ -81,7 +81,7 @@ export const ActualizarPastura = ({detalle, setClickEdit, setDetalle, todasLasPa
             body: JSON.stringify(request)
         };
 
-        await fetch("https://pasturas-back.fernandoh11.repl.co/pastura/update/"+detalle._id, requestOptions)
+        await fetch("https://net-appi.fernandoh11.repl.co/pastura/update/"+detalle._id, requestOptions)
             .then(response => response.json(response))
             .catch(error => console.error('Error:', error))
 
