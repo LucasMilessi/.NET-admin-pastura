@@ -12,7 +12,7 @@ import Logout from '../img/cerrar-sesion.png'
 import { Home } from '../pages/Home'
 import imgDef from '../img/ImagenPorDefecto.png'
 
-const URL_API = "http://localhost:1234/pastura"
+const URL_API = "https://pasturas-back.fernandoh11.repl.co/pastura"
 
 export  const Dashboard = () => {
 
@@ -28,7 +28,7 @@ export  const Dashboard = () => {
 
     const obtenerUsuario = () => {
 
-        fetch("http://localhost:1234/user/"+user.email)
+        fetch("https://pasturas-back.fernandoh11.repl.co/user/"+user.email)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(user => {

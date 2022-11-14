@@ -79,7 +79,7 @@ export const AgregarPastura = ({ setClick, todasLasPasturas }) => {
             body: JSON.stringify(request)
         };
 
-        await fetch("http://localhost:1234/pastura/create", requestOptions)
+        await fetch("https://pasturas-back.fernandoh11.repl.co/pastura/create", requestOptions)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(data => {

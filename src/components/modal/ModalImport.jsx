@@ -37,7 +37,7 @@ export const ModalImport = ({ setClickImport, todasLasPasturas }) => {
 
         
 
-        await fetch("http://localhost:1234/pastura/excel", requestOptions)
+        await fetch("https://pasturas-back.fernandoh11.repl.co/pastura/excel", requestOptions)
         .then(response => response.json(response))
         .catch(error => console.error('Error:', error))
         .then(response => {

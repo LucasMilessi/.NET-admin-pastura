@@ -11,7 +11,7 @@ export const ListarPasturas = ({ listPasturas, todasLasPasturas }) => {
     const [detalle, setDetalle] = useState([]);
 
     const obtenerDetallePorId = (id) => {
-        fetch('http://localhost:1234/pastura/search/'+id)
+        fetch('https://pasturas-back.fernandoh11.repl.co/pastura/search/'+id)
             .then(response => response.json())
             .then(data => {
                 setDetalle(data.pastura);
@@ -20,7 +20,7 @@ export const ListarPasturas = ({ listPasturas, todasLasPasturas }) => {
     }
 
     const eliminarPastura = async(id)=> {
-        await fetch('http://localhost:1234/pastura/delete/'+id, {
+        await fetch('https://pasturas-back.fernandoh11.repl.co/pastura/delete/'+id, {
         method: 'DELETE',
         });
 
