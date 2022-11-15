@@ -8,6 +8,7 @@ import { app } from '../../firebase/fb';
 export function Register() {
   const { signup } = useAuth();
 
+  const [imgCarga, setImgCarga] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -60,6 +61,8 @@ export function Register() {
 
   const archivoHandler = async(e) => {
 
+    setImgCarga(true);
+
     if(e.target.files[0] === undefined) return;
 
     const img = e.target.files[0];
@@ -70,6 +73,8 @@ export function Register() {
 
     const imgUrl = await archivoPath.getDownloadURL();
     setUser({...user, imagen: imgUrl});
+
+    setImgCarga(false);
 }
 
 
@@ -81,6 +86,7 @@ export function Register() {
       <img
         className="imgregistro"
         src="https://agrotendencia.tv/wp-content/uploads/2018/03/22-4-800x445.jpg"
+        alt=""
       />
 
       <div className="divFormR">
@@ -130,7 +136,7 @@ export function Register() {
           </div>
 
           <div>
-            <button type="submit">Registrarse</button>
+            <button type="submit" disabled={imgCarga} >Registrarse</button>
           </div>
 
             <div>
