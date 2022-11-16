@@ -2,6 +2,9 @@ html, body{
     max-width: 100%;
     max-height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    background-image:url(https://revistaverde.com.uy/wp-content/uploads/2018/09/pasturas-b-9-18-e1582732167389.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 div{

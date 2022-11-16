@@ -1,10 +1,23 @@
+import { useEffect } from "react";
 import Swal from "sweetalert2";
 
-export function Alert({ message }) {
+export function Alert({ message, setError }) {
+
+    useEffect(() => {
+        msj();
+    }, []);
     
-    Swal.fire({
-        icon: 'error',
-        title: message
-    })
+
+    const msj = async() => {
+
+        await Swal.fire({
+            icon: 'error',
+            title: message
+        });
+
+        setError("")
+    }
+    
+   
 
   }

@@ -5,8 +5,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase/fb";
@@ -37,7 +35,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log({ currentUser });
       setUser(currentUser);
       setLoading(false);
     });

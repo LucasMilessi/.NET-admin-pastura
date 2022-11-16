@@ -5,8 +5,6 @@ import { ListarPasturas } from "../components/tabla/ListarPasturas";
 import "../style/pages/dashboard.css"
 import { ModalExport } from "../components/modal/ModalExport";
 import { ModalImport } from "../components/modal/ModalImport";
-import { Link, useNavigate } from "react-router-dom";
-import { Register } from "../components/auth/Registro";
 import { useAuth } from "../context/AuthContext";
 import Logout from '../img/cerrar-sesion.png'
 import { Home } from '../pages/Home'
@@ -24,7 +22,6 @@ export  const Dashboard = () => {
     const [clickListPast, setClickListPast] = useState(false);
     const [home, setHome] = useState(false)
     const [usuario, setUsuario] = useState([]);
-    const navigate = useNavigate();
 
     const obtenerUsuario = () => {
 
@@ -72,9 +69,8 @@ export  const Dashboard = () => {
     }  
 
     const activarMenu = () => {
-      
-        // console.log(menu.current);
-        if(menu.current.className=="menuOpen"){
+
+        if(menu.current.className==="menuOpen"){
             menu.current.className="menuClosed";
             ocultarMenu();
         }else{
@@ -143,7 +139,6 @@ export  const Dashboard = () => {
         menu.current.style.height="5px";
         
         titulo.style.opacity="0";
-        // console.log(menu.current.getElementsByTagName("li"))
     }
 
     const clickListP = () => {
@@ -153,10 +148,8 @@ export  const Dashboard = () => {
 
     const clickHome = () => {
         setClickListPast(false);
-        setHome(true);  
+        setHome(true); 
     }
-
-    console.log(usuario);
 
     return (
         <div className="dashboard">
@@ -171,8 +164,8 @@ export  const Dashboard = () => {
                     <li className="menu-item"><a onClick={() =>clickHome()}>Home</a></li>
                     <li className="menu-item"><a onClick={() => clickListP()}>Lista de Pasturas</a></li>
                     <li className="menu-item"><a onClick={() => setClick(true)}>Crear Pastura</a></li> 
-                    <li className="menu-item"><a onClick={() => setClickExport(true)}>Export Excel</a></li>  
-                    <li className="menu-item"><a onClick={() => setClickImport(true)}>Import Excel</a></li>
+                    { clickListPast ? <li className="menu-item"><a onClick={() => setClickExport(true)}>Exportar Excel</a></li> : <li className="menu-item"><a id="aBoton" onClick={() => setClickExport(true)}>Exportar Excel <label id="labelA">(Listar Pastura)</label></a></li>}
+                    { clickListPast ? <li className="menu-item"><a onClick={() => setClickImport(true)}>Importar Excel</a></li> : <li className="menu-item"><a id="aBoton" onClick={() => setClickImport(true)}>Importar Excel <label id="labelA">(Listar Pastura)</label></a></li>}
                 </ol>
             </nav>
 

@@ -5,16 +5,20 @@ import { Alert } from "../alertas/Alert";
 import "../../style/components/auth/login.css";
 
 export function Login() {
+
+  const [click, setClick] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const { login, loginWithGoogle, resetPassword } = useAuth();
+  const { login} = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if( click ){
     setError("");
     try {
       await login(user.email, user.password);
@@ -22,29 +26,20 @@ export function Login() {
     } catch (error) {
       setError(error.message);
     }
+  }
   };
 
   const handleChange = ({ target: { value, name } }) =>
     setUser({ ...user, [name]: value });
 
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
-    if (!user.email) return setError("Write an email to reset password");
-    try {
-      await resetPassword(user.email);
-      setError("We sent you an email. Check your inbox");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
   return (
     <div id="login">
-      {error && <Alert message={error} />}
+      {error && <Alert message={error} setError={setError} />}
 
       <img
         className="imgLogin"
         src="https://p4.wallpaperbetter.com/wallpaper/818/376/875/oklahoma-landscape-sky-field-wallpaper-preview.jpg"
+        alt="Imagen"
       />
 
       <div className="divForm">
@@ -77,7 +72,7 @@ export function Login() {
           </div>
 
           <div>
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit" onClick={() => setClick(true)} >Iniciar Sesión</button>
           </div>
 
           <div>
