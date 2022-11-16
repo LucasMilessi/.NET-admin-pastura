@@ -6,7 +6,6 @@ import "../../style/components/auth/login.css";
 
 export function Login() {
 
-  const [click, setClick] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -18,7 +17,6 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if( click ){
     setError("");
     try {
       await login(user.email, user.password);
@@ -26,7 +24,6 @@ export function Login() {
     } catch (error) {
       setError(error.message);
     }
-  }
   };
 
   const handleChange = ({ target: { value, name } }) =>
@@ -72,7 +69,7 @@ export function Login() {
           </div>
 
           <div>
-            <button type="submit" onClick={() => setClick(true)} >Iniciar Sesión</button>
+            <button type="submit" >Iniciar Sesión</button>
           </div>
 
           <div>
